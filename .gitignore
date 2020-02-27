@@ -1,3 +1,7 @@
-./DeepSpeech/
-./kab/clips/
-./tmp/
+/DeepSpeech/
+/kab/*.tsv
+/kab/clips/
+/kab/*.csv
+/kab/lang/*.csv
+/kab/lang/*.tsv
+/tmp/
