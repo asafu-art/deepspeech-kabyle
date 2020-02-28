@@ -8,7 +8,7 @@ echo "Create a virtual environnement"
 source ./tmp/deepspeech-train-venv/bin/activate
 
 
-pushd ./DeepSpeech/
+pushd ../DeepSpeech/
 
 
 if [ ! -f DeepSpeech.py ]; then
