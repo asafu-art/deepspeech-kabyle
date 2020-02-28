@@ -1,8 +1,4 @@
 /DeepSpeech/
-/kab/*.tsv
-/kab/clips/
-/kab/*.csv
-/kab/lang/*.csv
-/kab/lang/*.tsv
+/kab/
 /tmp/
 .vscode/
