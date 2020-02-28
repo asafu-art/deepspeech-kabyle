@@ -2,6 +2,8 @@
 
 echo "Check DeepSpeech"
 
+pushd ./DeepSpeech/
+
 if [ ! -f DeepSpeech.py ]; then
     echo "Please make sure you run this from DeepSpeech's top level directory."
     exit 1
@@ -10,9 +12,9 @@ fi;
 echo "DeepSpeech all fit" 
 
 python3 -u DeepSpeech.py \
-  --train_files ../data/kab/clips/train.csv \
-  --dev_files ../data/kab/clips/dev.csv \
-  --test_files ../data/kab/clips/test.csv \
+  --train_files ../kab/clips/train.csv \
+  --dev_files ../kab/clips/dev.csv \
+  --test_files ../kab/clips/test.csv \
   --train_batch_size 1 \
   --dev_batch_size 1 \
   --test_batch_size 1 \
@@ -27,6 +29,6 @@ python3 -u DeepSpeech.py \
   --export_dir ../results/model_export/ \
   --checkpoint_dir ../results/checkout/ \
 
-  --lm_binary_path /home/nvidia/DeepSpeech/data/alfred/lm.binary \
+  --lm_binary_path ../data-kab/lm/lm.binary \
   --lm_trie_path /home/nvidia/DeepSpeech/data/alfred/trie \
   "$@"

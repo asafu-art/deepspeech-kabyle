@@ -3,3 +3,5 @@
 
 
 pre-processing/run.sh
+
+train.sh
