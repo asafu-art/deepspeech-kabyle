@@ -5,3 +5,4 @@
 /kab/lang/*.csv
 /kab/lang/*.tsv
 /tmp/
+.vscode/
