@@ -3,6 +3,7 @@ import collections
 
 allowed = list(string.ascii_lowercase)
 allowed.append("-")
+allowed.append(" ")
 allowed.extend(list("ẓṛṭɛṣḍǧḥɣč"))
 
 
@@ -24,6 +25,8 @@ replacer = {
     "òóôõøōŏőǫǭǿȍȏðοöô": "o",
     "ŕŗřȑȓ": "r",
     "śŝşšș": "s",
+    "γ": "ɣ",
+    "ε": "ɛ",
     "ţťŧț": "t",
     "ùúûũūŭůűųȕȗüû": "u",
     "ŵ": "w",
@@ -32,7 +35,24 @@ replacer = {
     "ß": "ss",
 }
 
-punctuation = ["'", '"', ".", "?", ",", "!", ";"]
+punctuation = [
+    "'",
+    '"',
+    ".",
+    "?",
+    ",",
+    "!",
+    ";",
+    "_",
+    ":",
+    "/",
+    "(",
+    ")",
+    "{",
+    "}",
+    "[",
+    "]",
+]
 
 replacements = {}
 
@@ -47,19 +67,30 @@ def remplaceSymbols(word):
     result = word
     for to_replace, replacement in replacements.items():
         result = result.replace(to_replace, replacement)
-
     return result
 
 
-def removeSymbols(word):
+def removePunctuation(word):
+    for i in word:
+        if i in punctuation or i not in allowed:
+            word = word.replace(i, "")
     return word
 
 
 def cleanWord(word):
     word = word.lower()
     word = remplaceSymbols(word)
-    word = removeSymbols(word)
+    word = removePunctuation(word)
     return word
+
+
+def checkSentence(sentence):
+    for i in sentence:
+        if i not in allowed:
+            return False
+        if sentence.find(" -") > 0 or sentence.find("- ") > 0:
+            return False
+    return True
 
 
 def cleanSentence(sentence):
@@ -67,14 +98,17 @@ def cleanSentence(sentence):
     sentence = sentence.strip()
     sentence = sentence.lower()
     sentence = remplaceSymbols(sentence)
+    sentence = removePunctuation(sentence)
+
+    a = checkSentence(sentence)
 
     words = sentence.strip().split(" ")
     # print(words)
     cleanedWords = []
     for word in words:
         word = cleanWord(word)
-        if word.__contains__("a"):
-            print(word)
+        # if word.__contains__("a"):
+        #    print(word)
         cleanedWords.append(word)
 
     result = " ".join(cleanedWords)

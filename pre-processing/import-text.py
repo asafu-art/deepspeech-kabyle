@@ -44,7 +44,7 @@ if __name__ == "__main__":
                         cleanedSentence = text_cleaning.cleanSentence(sentence)
                         print("CS:", cleanedSentence)
                         i += 1
-                        if i == 20:
+                        if i == 100:
                             break
                         # samples.append((row['path'], row['sentence']))
 

@@ -16,9 +16,18 @@ if [ ! -f DeepSpeech.py ]; then
     exit 1
 fi;
 
-
 pip3 install -r requirements.txt
 
 echo "Requirements install complete"
 
+popd
+
+git clone https://github.com/kpu/kenlm.git
+pushd kenlm/
+mkdir -p build
+pushd build/
+cmake ..
+make -j2
+
+popd
 popd
