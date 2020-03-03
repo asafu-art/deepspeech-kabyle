@@ -2,6 +2,17 @@
 
 source tmp/deepspeech-kab-venv/bin/activate
 
+# build the trnscripts' file mfrom tsv files
+# delete punctuation
+# delete sentences containing unwanted caracters
+# transform to lower case
+# duplicate sentences containing "-" with sentences that do not
+
+
+
+
+
+
 echo "Create language model"
 
 python3 pre-processing/counter.py data-kab/allSentencesClean.txt data-kab/top-words.txt 600000
