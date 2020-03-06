@@ -1,6 +1,8 @@
 #!/bin/sh
 # created by Mestafa Kamal
 
+# This script launches the tsv cleaing program and imports the vocal corpus
+
 source tmp/deepspeech-kab-venv/bin/activate
 
 
@@ -14,8 +16,6 @@ source tmp/deepspeech-kab-venv/bin/activate
 # duplicate sentences containing "-"
 # build language model
 # Build Trie
-
-
 
 
 
