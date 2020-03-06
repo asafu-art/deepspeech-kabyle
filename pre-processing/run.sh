@@ -1,6 +1,8 @@
 #!/bin/sh
 # created by Mestafa Kamal
 
-a1-virtualenv.sh
+a1_virtualenv.sh
 
-a2-import-data-kab.sh
+a2_import_data_kab.sh
+
+a3_language_model.sh
