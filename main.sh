@@ -1,7 +1,10 @@
 #!/bin/sh
 
 
+pushd pre-processing
 
-pre-processing/run.sh
+run.sh
+
+popd
 
 train.sh

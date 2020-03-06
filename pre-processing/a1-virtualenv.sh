@@ -5,7 +5,7 @@ echo "Create a virtual environnement"
 
 #virtualenv -p python3 ./tmp/deepspeech-kab-venv
 
-source ./tmp/deepspeech-train-venv/bin/activate
+source ./tmp/deepspeech-kab-venv/bin/activate
 
 
 pushd ../DeepSpeech/
