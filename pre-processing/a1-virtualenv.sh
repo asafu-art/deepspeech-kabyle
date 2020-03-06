@@ -1,6 +1,9 @@
 #!/bin/sh
 # created by Mestafa Kamal
 
+# This script create a Python3 virtual environment 
+# in which the requirements are installs so that the project can be executed.
+
 echo "Create a virtual environnement"
 
 
