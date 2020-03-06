@@ -3,13 +3,11 @@
 
 source tmp/deepspeech-kab-venv/bin/activate
 
-# build the trnscripts' file mfrom tsv files
-# delete punctuation
-# delete sentences containing unwanted caracters
-# transform to lower case
-# duplicate sentences containing "-" with sentences that do not
 
-
+# Build allSentences.txt file from csv
+# duplicate sentences containing "-"
+# build language model
+# Build Trie
 
 
 

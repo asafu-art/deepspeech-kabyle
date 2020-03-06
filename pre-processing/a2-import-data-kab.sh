@@ -12,11 +12,6 @@ source tmp/deepspeech-kab-venv/bin/activate
 # Replace not alllowed letters
 # Replace apostroph
 # import_cv2 with alphabet filter
-# Build allSentences.txt file from csv
-# duplicate sentences containing "-"
-# build language model
-# Build Trie
-
 
 
 # alphabet.txt contains the allowed letters in the wavs' transcipts. 
