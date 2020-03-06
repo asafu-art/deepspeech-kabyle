@@ -1,3 +1,5 @@
+# created by Mestafa Kamal
+
 # source ../tmp/deepspeech-kab-venv/bin/activate
 
 # python3 prog.py tsv/

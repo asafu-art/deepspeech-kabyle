@@ -1,4 +1,5 @@
 #!/bin/sh
+# created by Mestafa Kamal
 
 source tmp/deepspeech-kab-venv/bin/activate
 
