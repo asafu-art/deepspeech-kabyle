@@ -12,7 +12,7 @@ echo "Create a virtual environnement"
 source ./tmp/deepspeech-kab-venv/bin/activate
 
 
-pushd ../DeepSpeech/
+pushd ./DeepSpeech/
 
 
 if [ ! -f DeepSpeech.py ]; then
@@ -32,6 +32,9 @@ mkdir -p build
 pushd build/
 cmake ..
 make -j2
+
+wget https://voice-prod-bundler-ee1969a6ce8178826482b88e843c335139bd3fb4.s3.amazonaws.com/cv-corpus-4-2019-12-10/kab.tar.gz
+
 
 popd
 popd

@@ -1,6 +1,8 @@
 # created by Mestafa Kamal
 
 import sys
+import os
+import shutil
 
 
 def replace(fich):
@@ -20,4 +22,10 @@ def replace(fich):
 
 
 if __name__ == "__main__":
-    replace(sys.argv[1])
+    try:
+        os.mkdir("./ts/")
+        print("Directory", str(os.getcwd()) + "/ts created for saving tsv")
+    except:
+        print("Directory", str(os.getcwd()) + "/tsv already exists!")
+    # replace(sys.argv[1])
+
