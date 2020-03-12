@@ -17,6 +17,7 @@ replacer = {
     "èéêëēĕėęěȅȇȩîêë": "e",
     "ĝġģǥǵ": "g",
     "ğ": "ǧ",
+    "Ğ": "Ǧ",
     "ĥħȟ": "h",
     "ìíîïĩīĭįıȉȋîï": "i",
     "ĵǰ": "j",
@@ -28,8 +29,10 @@ replacer = {
     "ŕŗřȑȓ": "r",
     "śŝşšș": "s",
     "γ": "ɣ",
+    "Γ": "Ɣ",
     "ε": "ɛ",
-    "ţťŧț": "t",
+    "σ": "ɛ",
+    "ťŧț": "t",
     "ùúûũūŭůűųȕȗüû": "u",
     "ŵ": "w",
     "ýÿŷ": "y",
@@ -62,7 +65,7 @@ for all, replacement in replacer.items():
     for to_replace in all:
         replacements[to_replace] = replacement
 
-print(allowed)
+# print(allowed)
 
 
 def remplaceSymbols(word):
@@ -82,39 +85,37 @@ def removePunctuation(word):
 def cleanWord(word):
     word = word.lower()
     word = remplaceSymbols(word)
+    word = replaceTs(word)
     word = removePunctuation(word)
     return word
 
 
-def checkSentence(sentence):
-    for i in sentence:
-        if i not in allowed:
-            return False
-        if sentence.find(" -") > 0 or sentence.find("- ") > 0:
-            return False
-    return True
+def removeBadSpace(sentence):
+    sentence = sentence.replace(" -", "-")
+    sentence = sentence.replace("- ", "-")
+    return sentence
+
+
+def replaceTs(word):
+    if word.endswith("ţţ"):
+        word = word[0:-2] + "t"
+    elif word.endswith("ţ"):
+        word = word[0:-1] + "t"
+    word = word.replace("ţţ", "tt")
+    word = word.replace("ţ", "tt")
+    return word
 
 
 def cleanSentence(sentence):
 
-    sentence = sentence.strip()
-    sentence = sentence.lower()
-    sentence = remplaceSymbols(sentence)
-    sentence = removePunctuation(sentence)
-
-    a = checkSentence(sentence)
-
+    sentence = removeBadSpace(sentence)
     words = sentence.strip().split(" ")
-    # print(words)
     cleanedWords = []
+
     for word in words:
         word = cleanWord(word)
-        # if word.__contains__("a"):
-        #    print(word)
         cleanedWords.append(word)
 
     result = " ".join(cleanedWords)
-
-    sentence1 = sentence.replace("-", " ")
     return result
 
