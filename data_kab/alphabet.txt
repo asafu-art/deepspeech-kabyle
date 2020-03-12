@@ -2,6 +2,9 @@
 # associated with a numeric label.
 # A line that starts with # is a comment. You can escape it with \# if you wish
 # to use '#' as a label.
+# This file containes the kabyle alphabet with some extra letters due to different keyboards. 
+# The extra letters are allowed here in order to appear in the CSV files, 
+# and are to be replaced by standard kabyle letters.
  
 a
 b
@@ -23,9 +26,7 @@ m
 n
 o
 ɛ
-ε
 ɣ
-γ
 p
 q
 r
@@ -42,4 +43,11 @@ y
 z
 ẓ
 -
+σ
+γ
+ğ
+ε
+Γ
+Σ
+ţ
 # The last (non-comment) line needs to end with a newline.

@@ -7,16 +7,21 @@ source tmp/deepspeech-kab-venv/bin/activate
 
 
 
-
-# clean the TSVs
-# Replace not alllowed letters
-# Replace apostroph
 # import_cv2 with alphabet filter
+# back-up the CV files
+# clean the CSVs
+# Replace not allowed letters
+# Duplicate sentences containing the character "-"
+# Produce the allSentences.txt files
 
 
-# alphabet.txt contains the allowed letters in the wavs' transcipts. 
+
+# alphabet.txt contains the allowed letters in the wavs' transcipts plus some extra-letters.
 # Numbers are not allowed due to the non-possibility to transcript them into kabyle yet.
 
+pushd DeepSpeech/
 
-DeepSpeech/bin/import_cv2.py --filter_alphabet data-kab/alphabet.txt ./kab/
+bin/import_cv2.py --filter_alphabet ../data-kab/alphabet.txt ./kab/
+
+popd
 

@@ -17,6 +17,7 @@ def replace(fich):
     data = data.replace("γ", "ɣ")
     data = data.replace("Γ", "Ɣ")
     data = data.replace("ε", "ɛ")
+    data = data.replace("σ", "ɛ")
     data = data.replace("Σ", "Ɛ")
     data = data.replace("ţţ", "tt")
     data = data.replace("ţ", "tt")
@@ -29,6 +30,7 @@ def replace(fich):
     fin.close()
 
 
+"""
 if __name__ == "__main__":
     PARSER = argparse.ArgumentParser(description="Clean TSV files")
     PARSER.add_argument("--tsv_dir", help="Directory containing tsv files", type=str)
@@ -59,11 +61,21 @@ if __name__ == "__main__":
                         i += 1
                         if i == 100:
                             break
-"""                            
+"""
+
+"""
     try:
         os.mkdir("./ts/")
         print("Directory", str(os.getcwd()) + "/ts created for saving tsv")
     except:
         print("Directory", str(os.getcwd()) + "/tsv already exists!")
-    # replace(sys.argv[1])
 """
+# replace(sys.argv[1])
+
+a = "Σelmeγ"
+print(a)
+a = a.lower()
+print(a)
+a = a.replace("σ", "ɛ")
+a = a.replace("γ", "ɣ")
+print(a)

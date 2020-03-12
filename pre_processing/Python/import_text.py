@@ -28,7 +28,7 @@ if __name__ == "__main__":
 
     if PARAMS.tsv_dir is not None:
         for dataset in ["train", "test", "dev", "validated", "other"]:
-            input_tsv = path.join(path.abspath(PARAMS.tsv_dir), dataset + ".tsv")
+            input_tsv = path.join(path.abspath(PARAMS.tsv_dir), dataset + ".csv")
             if os.path.isfile(input_tsv):
                 print("Loading TSV file ", input_tsv)
                 # output_csv = path.join(audio_dir, os.path.split(input_tsv)[-1].replace('tsv', 'csv'))
@@ -37,10 +37,10 @@ if __name__ == "__main__":
                 # Get audiofile path and transcript for each sentence in tsv
                 samples = []
                 with open(input_tsv, encoding="utf-8") as input_tsv_file:
-                    reader = csv.DictReader(input_tsv_file, delimiter="\t")
+                    reader = csv.DictReader(input_tsv_file, delimiter=",")
                     i = 0
                     for row in reader:
-                        sentence = row["sentence"]
+                        sentence = row["transcript"]
 
                         print("S: ", sentence)
                         cleanedSentence = text_cleaning.cleanSentence(sentence)

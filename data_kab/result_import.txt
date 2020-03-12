@@ -1,52 +1,135 @@
+# Import results without extra letters
+
 Loading TSV file:  /mnt/sda8/ProjetPFE/deepspeech-kabyle/kab/train.tsv
 Saving new DeepSpeech-formatted CSV file to:  ../kab/clips/train.csv
 Importing mp3 files...
 Progress  100% completed
 Writing CSV file for DeepSpeech.py as:  ../kab/clips/train.csv
 Progress  100% completed
+
 Imported 37019 samples.
 Skipped 1306 samples that failed on transcript validation.
 Skipped 37 samples that were longer than 10 seconds.
 Final amount of imported audio: 36:57:17.
+
 Loading TSV file:  /mnt/sda8/ProjetPFE/deepspeech-kabyle/kab/test.tsv
 Saving new DeepSpeech-formatted CSV file to:  ../kab/clips/test.csv
 Importing mp3 files...
 Progress   99% completed
 Writing CSV file for DeepSpeech.py as:  ../kab/clips/test.csv
 Progress  100% completed
+
 Imported 11472 samples.
 Skipped 348 samples that failed on transcript validation.
 Skipped 11 samples that were longer than 10 seconds.
 Final amount of imported audio: 12:08:59.
+
 Loading TSV file:  /mnt/sda8/ProjetPFE/deepspeech-kabyle/kab/dev.tsv
 Saving new DeepSpeech-formatted CSV file to:  ../kab/clips/dev.csv
 Importing mp3 files...
 Progress   99% completed
 Writing CSV file for DeepSpeech.py as:  ../kab/clips/dev.csv
 Progress  100% completed
+
 Imported 11476 samples.
 Skipped 376 samples that failed on transcript validation.
 Skipped 6 samples that were longer than 10 seconds.
 Final amount of imported audio: 11:19:14.
+
 Loading TSV file:  /mnt/sda8/ProjetPFE/deepspeech-kabyle/kab/validated.tsv
 Saving new DeepSpeech-formatted CSV file to:  ../kab/clips/validated.csv
 Importing mp3 files...
 Progress   99% completed
 Writing CSV file for DeepSpeech.py as:  ../kab/clips/validated.csv
 Progress  100% completed
+
 Imported 261157 samples.
 Skipped 8796 samples that failed on transcript validation.
 Skipped 181 samples that were longer than 10 seconds.
 Final amount of imported audio: 259:24:13.
+
 Loading TSV file:  /mnt/sda8/ProjetPFE/deepspeech-kabyle/kab/other.tsv
 Saving new DeepSpeech-formatted CSV file to:  ../kab/clips/other.csv
 Importing mp3 files...
 Progress   97% completed
 Writing CSV file for DeepSpeech.py as:  ../kab/clips/other.csv
 Progress  100% completed
+
 Imported 626 samples.
 Skipped 24 samples that failed on transcript validation.
 Final amount of imported audio: 0:35:16.
+Progress  100% completed
+Progress  100% completed
+Progress  100% completed
+Progress  100% completed
+Progress  100% completed
+
+
+
+
+
+
+# Import results with extra letters allowed
+
+
+Loading TSV file:  /mnt/sda8/ProjetPFE/deepspeech-kabyle/kab/train.tsv
+Saving new DeepSpeech-formatted CSV file to:  ../kab/clips/train.csv
+Importing mp3 files...
+Progress  100% completed
+Writing CSV file for DeepSpeech.py as:  ../kab/clips/train.csv
+Progress  100% completed
+
+Imported 37017 samples.
+Skipped 207 samples that failed on transcript validation.
+Skipped 39 samples that were longer than 10 seconds.
+Final amount of imported audio: 36:57:17.
+
+Loading TSV file:  /mnt/sda8/ProjetPFE/deepspeech-kabyle/kab/test.tsv
+Saving new DeepSpeech-formatted CSV file to:  ../kab/clips/test.csv
+Importing mp3 files...
+Progress  100% completed
+Writing CSV file for DeepSpeech.py as:  ../kab/clips/test.csv
+Progress  100% completed
+
+Imported 11472 samples.
+Skipped 62 samples that failed on transcript validation.
+Skipped 11 samples that were longer than 10 seconds.
+Final amount of imported audio: 12:08:59.
+
+Loading TSV file:  /mnt/sda8/ProjetPFE/deepspeech-kabyle/kab/dev.tsv
+Saving new DeepSpeech-formatted CSV file to:  ../kab/clips/dev.csv
+Importing mp3 files...
+Progress   99% completed
+Writing CSV file for DeepSpeech.py as:  ../kab/clips/dev.csv
+Progress  100% completed
+
+Imported 11475 samples.
+Skipped 61 samples that failed on transcript validation.
+Skipped 7 samples that were longer than 10 seconds.
+Final amount of imported audio: 11:19:14.
+
+Loading TSV file:  /mnt/sda8/ProjetPFE/deepspeech-kabyle/kab/validated.tsv
+Saving new DeepSpeech-formatted CSV file to:  ../kab/clips/validated.csv
+Importing mp3 files...
+Progress   99% completed
+Writing CSV file for DeepSpeech.py as:  ../kab/clips/validated.csv
+Progress  100% completed
+
+Imported 261148 samples.
+Skipped 1645 samples that failed on transcript validation.
+Skipped 190 samples that were longer than 10 seconds.
+Final amount of imported audio: 259:24:13.
+Loading TSV file:  /mnt/sda8/ProjetPFE/deepspeech-kabyle/kab/other.tsv
+Saving new DeepSpeech-formatted CSV file to:  ../kab/clips/other.csv
+Importing mp3 files...
+Progress   98% completed
+
+Writing CSV file for DeepSpeech.py as:  ../kab/clips/other.csv
+Progress  100% completed
+Imported 626 samples.
+Skipped 4 samples that failed on transcript validation.
+Final amount of imported audio: 0:35:16.
+
 Progress  100% completed
 Progress  100% completed
 Progress  100% completed
