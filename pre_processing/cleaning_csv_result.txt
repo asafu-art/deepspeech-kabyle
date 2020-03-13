@@ -1,0 +1,37 @@
+vocab: /mnt/sda8/ProjetPFE/deepspeech-kabyle/pre_processing/Python/AllSentences.txt
+False
+Directory: /mnt/sda8/ProjetPFE/deepspeech-kabyle/pre_processing
+Loading CSV file  /mnt/sda8/ProjetPFE/deepspeech-kabyle/pre_processing/csv/train.csv
+Treated sentences: 36810
+File Cleanded sentences: 1113
+File Stripped sentences: 21276
+temp: /tmp/tmpbmufv1tv
+Directory: /mnt/sda8/ProjetPFE/deepspeech-kabyle/pre_processing
+Loading CSV file  /mnt/sda8/ProjetPFE/deepspeech-kabyle/pre_processing/csv/test.csv
+Treated sentences: 11410
+File Cleanded sentences: 297
+File Stripped sentences: 6438
+temp: /tmp/tmptvg_uf2n
+Directory: /mnt/sda8/ProjetPFE/deepspeech-kabyle/pre_processing
+Loading CSV file  /mnt/sda8/ProjetPFE/deepspeech-kabyle/pre_processing/csv/dev.csv
+Treated sentences: 11414
+File Cleanded sentences: 322
+File Stripped sentences: 6296
+temp: /tmp/tmp6z3u8i21
+Directory: /mnt/sda8/ProjetPFE/deepspeech-kabyle/pre_processing
+Loading CSV file  /mnt/sda8/ProjetPFE/deepspeech-kabyle/pre_processing/csv/validated.csv
+Treated sentences: 259503
+File Cleanded sentences: 7472
+File Stripped sentences: 143943
+temp: /tmp/tmp95dllsky
+Directory: /mnt/sda8/ProjetPFE/deepspeech-kabyle/pre_processing
+Loading CSV file  /mnt/sda8/ProjetPFE/deepspeech-kabyle/pre_processing/csv/other.csv
+Treated sentences: 622
+File Cleanded sentences: 20
+File Stripped sentences: 355
+temp: /tmp/tmp47bicngp
+
+Cleaning complete
+Treated sentence: 319759
+Cleanded sentences: 9224
+Stripped sentences: 178308

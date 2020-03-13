@@ -25,3 +25,4 @@ bin/import_cv2.py --filter_alphabet ../data-kab/alphabet.txt ./kab/
 
 popd
 
+python3 clean_csv.py --csv_dir .. --vocabulary_file ./AllSentences.txt

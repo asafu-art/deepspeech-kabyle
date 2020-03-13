@@ -11,6 +11,7 @@ echo "Create a virtual environnement"
 
 source ./tmp/deepspeech-kab-venv/bin/activate
 
+pip3 install -r requirements.txt
 
 pushd ./DeepSpeech/
 

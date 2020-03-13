@@ -8,6 +8,7 @@ import argparse
 import csv
 import text_cleaning as tc
 from os import path
+from tempfile import NamedTemporaryFile
 
 
 def replace(fich):
@@ -34,15 +35,33 @@ def replace(fich):
 if __name__ == "__main__":
     PARSER = argparse.ArgumentParser(description="Clean CSV files")
     PARSER.add_argument("--csv_dir", help="Directory containing tsv files", type=str)
+    PARSER.add_argument(
+        "--vocabulary_file", help="File containing all the corpus vocabulary", type=str
+    )
+
     PARAMS = PARSER.parse_args()
     # ALPHABET = Alphabet(PARAMS.filter_alphabet) if PARAMS.filter_alphabet else None
 
     if PARAMS.csv_dir is not None:
-        index = 0
-        index1 = 0
+
+        totalTreated = 0
+        totalCleaned = 0
+        totalStripped = 0
+
+        if PARAMS.vocabulary_file is not None:
+            vocabulary_out = path.abspath(PARAMS.vocabulary_file)
+            print("Creating vocabulary file:", vocabulary_out)
+            vocabulary = open(vocabulary_out, "wt", encoding="utf-8")
+            vocab = True
+
         for dataset in ["train", "test", "dev", "validated", "other"]:
-            # for dataset in ["other"]:
-            input_csv = path.join(path.abspath(PARAMS.csv_dir), dataset + ".csv")
+            # for dataset in ["other", "test"]:
+            fileTreated = 0
+            fileCleanded = 0
+            fileStripped = 0
+
+            print("Directory:", path.abspath(PARAMS.csv_dir))
+            input_csv = path.join(path.abspath(PARAMS.csv_dir), "csv", dataset + ".csv")
             if os.path.isfile(input_csv):
                 print("Loading CSV file ", input_csv)
                 # output_csv = path.join(audio_dir, os.path.split(input_tsv)[-1].replace('tsv', 'csv'))
@@ -50,28 +69,60 @@ if __name__ == "__main__":
 
                 # Get audiofile path and transcript for each sentence in tsv
                 # samples = []
-                with open(input_csv, encoding="utf-8") as input_csv_file:
+
+                temp_file = NamedTemporaryFile(mode="w", delete=False)
+                fieldname = ["wav_filename", "wav_filesize", "transcript"]
+
+                with open(
+                    input_csv, "rt", encoding="utf-8"
+                ) as input_csv_file, temp_file:
                     reader = csv.DictReader(input_csv_file, delimiter=",")
-                    i = 0
+                    writer = csv.DictWriter(temp_file, fieldnames=fieldname)
+                    writer.writeheader()
                     for row in reader:
                         sentence = row["transcript"]
                         cleanedSentence = tc.cleanSentence(sentence)
+                        # Writing in vacabulary file
+                        if vocab:
+                            vocabulary.write(cleanedSentence + "\n")
+
                         if sentence != cleanedSentence:
-                            index += 1
-                            print("S: ", sentence)
-                            print("CS:", cleanedSentence)
-                            if cleanedSentence.__contains__("-"):
-                                index1 += 1
-                                noTiretSentence = cleanedSentence.replace("-", " ")
-                                print("-S:", noTiretSentence)
-                        i += 1
-                        if i == 3000:
-                            # break
-                            pass
-                    print(i)
+                            fileCleanded += 1
+                            # print("S: ", sentence)
+                            # print("CS:", cleanedSentence)
+                        if cleanedSentence.__contains__("-") and vocab == True:
+                            noTiretSentence = cleanedSentence.replace("-", " ")
+                            # print("-S:", noTiretSentence)
+                            fileStripped += 1
+                            vocabulary.write(noTiretSentence + "\n")
+
+                        writer.writerow(
+                            {
+                                "wav_filename": row["wav_filename"],
+                                "wav_filesize": row["wav_filesize"],
+                                "transcript": cleanedSentence,
+                            }
+                        )
+                        fileTreated += 1
+
+                    print("Treated sentences:", fileTreated)
+                    totalTreated += fileTreated
+                    print("File Cleanded sentences:", fileCleanded)
+                    totalCleaned += fileCleanded
+                    print("File Stripped sentences:", fileStripped)
+                    totalStripped += fileStripped
+
+                print("temp:", temp_file.name)
                 input_csv_file.close()
-        print(index, "sentences cleaned")
-        print(index1, "sentences stripped")
+                temp_file.close()
+                shutil.move(temp_file.name, input_csv)
+
+        vocabulary.close()
+        print()
+        print("Cleaning complete")
+        print("Treated sentence:", totalTreated)
+        print("Cleanded sentences:", totalCleaned)
+        print("Stripped sentences:", totalStripped)
 
 
 """
