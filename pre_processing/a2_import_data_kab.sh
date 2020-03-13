@@ -15,7 +15,6 @@ source tmp/deepspeech-kab-venv/bin/activate
 # Produce the allSentences.txt files
 
 
-
 # alphabet.txt contains the allowed letters in the wavs' transcipts plus some extra-letters.
 # Numbers are not allowed due to the non-possibility to transcript them into kabyle yet.
 
@@ -25,4 +24,4 @@ bin/import_cv2.py --filter_alphabet ../data-kab/alphabet.txt ./kab/
 
 popd
 
-python3 clean_csv.py --csv_dir .. --vocabulary_file ./AllSentences.txt
+python3 pre_processing/Python/clean_csv.py --csv_dir kab/clips --vocabulary_file ./daya_kab/AllSentences.txt

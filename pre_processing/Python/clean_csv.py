@@ -11,27 +11,6 @@ from os import path
 from tempfile import NamedTemporaryFile
 
 
-def replace(fich):
-    fin = open(fich, "rt")
-    data = fin.read()
-    data = data.replace("ğ", "ǧ")
-    data = data.replace("Ğ", "Ǧ")
-    data = data.replace("γ", "ɣ")
-    data = data.replace("Γ", "Ɣ")
-    data = data.replace("ε", "ɛ")
-    data = data.replace("σ", "ɛ")
-    data = data.replace("Σ", "Ɛ")
-    data = data.replace("ţţ", "tt")
-    data = data.replace("ţ", "tt")
-    data = data.replace("tttt", "tt")
-    data = data.replace("ttt", "tt")
-    fin.close()
-    print(fich)
-    fin = open(fich, "wt")
-    fin.write(data)
-    fin.close()
-
-
 if __name__ == "__main__":
     PARSER = argparse.ArgumentParser(description="Clean CSV files")
     PARSER.add_argument("--csv_dir", help="Directory containing tsv files", type=str)
@@ -40,7 +19,6 @@ if __name__ == "__main__":
     )
 
     PARAMS = PARSER.parse_args()
-    # ALPHABET = Alphabet(PARAMS.filter_alphabet) if PARAMS.filter_alphabet else None
 
     if PARAMS.csv_dir is not None:
 
@@ -55,7 +33,6 @@ if __name__ == "__main__":
             vocab = True
 
         for dataset in ["train", "test", "dev", "validated", "other"]:
-            # for dataset in ["other", "test"]:
             fileTreated = 0
             fileCleanded = 0
             fileStripped = 0
@@ -64,11 +41,6 @@ if __name__ == "__main__":
             input_csv = path.join(path.abspath(PARAMS.csv_dir), "csv", dataset + ".csv")
             if os.path.isfile(input_csv):
                 print("Loading CSV file ", input_csv)
-                # output_csv = path.join(audio_dir, os.path.split(input_tsv)[-1].replace('tsv', 'csv'))
-                # print("Saving new DeepSpeech-formatted CSV file to , output_csv")
-
-                # Get audiofile path and transcript for each sentence in tsv
-                # samples = []
 
                 temp_file = NamedTemporaryFile(mode="w", delete=False)
                 fieldname = ["wav_filename", "wav_filesize", "transcript"]
@@ -123,13 +95,3 @@ if __name__ == "__main__":
         print("Treated sentence:", totalTreated)
         print("Cleanded sentences:", totalCleaned)
         print("Stripped sentences:", totalStripped)
-
-
-"""
-    try:
-        os.mkdir("./ts/")
-        print("Directory", str(os.getcwd()) + "/ts created for saving tsv")
-    except:
-        print("Directory", str(os.getcwd()) + "/tsv already exists!")
-"""
-# replace(sys.argv[1])
