@@ -1,10 +1,16 @@
 #!/bin/sh
 
+echo "Statring DeepSpeech Kabyle"
+pwd
 
-pushd pre-processing
+echo "Installing requirements..."
 
-run.sh
+./a1_prepareEnvironment.sh
+
+pushd pre_processing
+
+./run.sh
 
 popd
 
-train.sh
+#train.sh

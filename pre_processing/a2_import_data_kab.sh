@@ -3,7 +3,9 @@
 
 # This script launches the tsv cleaing program and imports the vocal corpus
 
-source tmp/deepspeech-kab-venv/bin/activate
+echo "Emport kabyle data"
+
+# source tmp/deepspeech-kab-venv/bin/activate
 
 
 
@@ -18,10 +20,20 @@ source tmp/deepspeech-kab-venv/bin/activate
 # alphabet.txt contains the allowed letters in the wavs' transcipts plus some extra-letters.
 # Numbers are not allowed due to the non-possibility to transcript them into kabyle yet.
 
-pushd DeepSpeech/
+pushd ../DeepSpeech/
 
-bin/import_cv2.py --filter_alphabet ../data-kab/alphabet.txt ./kab/
+if [ ! -f DeepSpeech.py ]; then
+    echo "Please make sure you run this from DeepSpeech's top level directory."
+    exit 1
+fi;
+
+echo "Emport Deepspeech cv2"
+pwd 
+#bin/import_cv2.py --filter_alphabet ../data-kab/alphabet.txt ./kab/
 
 popd
 
-python3 pre_processing/Python/clean_csv.py --csv_dir kab/clips --vocabulary_file ./daya_kab/AllSentences.txt
+echo "Clean csv files"
+pwd
+
+#python3 ./Python/clean_csv.py --csv_dir ../kab/clips --vocabulary_file ../data_kab/allSentences.txt
