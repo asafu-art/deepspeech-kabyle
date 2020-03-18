@@ -7,3 +7,5 @@ pwd
 ./a2_import_data_kab.sh
 
 ./a3_language_model.sh
+
+echo "Data pre-processing complete"

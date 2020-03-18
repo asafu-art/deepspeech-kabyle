@@ -13,4 +13,6 @@ pushd pre_processing
 
 popd
 
+echo "Statring DeepSpeech training..."
+
 #train.sh

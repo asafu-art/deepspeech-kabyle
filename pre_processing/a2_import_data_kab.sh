@@ -29,11 +29,11 @@ fi;
 
 echo "Emport Deepspeech cv2"
 pwd 
-#bin/import_cv2.py --filter_alphabet ../data-kab/alphabet.txt ./kab/
+bin/import_cv2.py --filter_alphabet ../data-kab/alphabet.txt ./kab/
 
 popd
 
 echo "Clean csv files"
 pwd
 
-#python3 ./Python/clean_csv.py --csv_dir ../kab/clips --vocabulary_file ../data_kab/allSentences.txt
+python3 ./Python/clean_csv.py --csv_dir ../kab/clips --vocabulary_file ../data_kab/allSentences.txt

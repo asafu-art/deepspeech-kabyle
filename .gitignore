@@ -1,4 +1,10 @@
-/DeepSpeech/
-/kab/
-/tmp/
+DeepSpeech/
+DeepSpeech-0.6.1/
+kab/
+tmp/
 .vscode/
+pre_processing/csv/
+data_kab/lm/
+tensorflow/
+help.txt
+models/
