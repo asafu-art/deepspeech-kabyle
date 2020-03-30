@@ -29,7 +29,7 @@ if [ ! -f "$DATADIR/lm/lm.binary" ]; then
 			$DATADIR/lm/lm.binary		
 	fi;
     if [ ! -f "$DATADIR/lm/trie" ]; then	
-		$DS_DIR/native_client/generate_trie $HOMEDIR/${MODEL_LANGUAGE}/data-kab/alphabet.txt $DATADIR/lm/lm.binary $DATADIR/lm/trie
+		$DS_DIR/native_client/generate_trie $HOMEDIR/${MODEL_LANGUAGE}/data_kab/alphabet.txt $DATADIR/lm/lm.binary $DATADIR/lm/trie
 	fi;
 
 

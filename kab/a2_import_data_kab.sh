@@ -35,7 +35,7 @@ if [ ! -f "$DATADIR/extracted/data/cv_kab/clips/train.csv" ]; then
 		tar -C $DATADIR/extracted/data/cv_kab/ -xf $DATADIR/sources/kab.tar.gz
 
 
-		python bin/import_cv2.py ${IMPORT_AS_ENGLISH} --filter_alphabet $HOMEDIR/${MODEL_LANGUAGE}/data-kab/alphabet.txt $DATADIR/extracted/data/cv_kab/
+		python bin/import_cv2.py ${IMPORT_AS_ENGLISH} --filter_alphabet $HOMEDIR/${MODEL_LANGUAGE}/data_kab/alphabet.txt $DATADIR/extracted/data/cv_kab/
 	fi;
 popd
 
