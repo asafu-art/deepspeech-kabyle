@@ -21,7 +21,7 @@ echo "Emport kabyle data"
 # alphabet.txt contains the allowed letters in the wavs' transcipts plus some extra-letters.
 # Numbers are not allowed due to the non-possibility to transcript them into kabyle yet.
 
-pushd $HOMEDIR/ds/
+pushd $DS_DIR
     CV_KAB="kab.tar.gz"
    
     if [ ! -f "$DATADIR/sources/kab.tar.gz" ]; then
