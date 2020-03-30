@@ -7,9 +7,6 @@ set -xe
 echo "Emport kabyle data"
 
 
-
-
-
 # import_cv2 with alphabet filter
 # back-up the CV files
 # clean the CSVs

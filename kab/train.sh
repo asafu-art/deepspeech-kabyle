@@ -39,9 +39,3 @@ python -u DeepSpeech.py \
 popd
 
 
-
-
-
-
-
-
