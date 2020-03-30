@@ -22,6 +22,7 @@ echo "Emport kabyle data"
 # Numbers are not allowed due to the non-possibility to transcript them into kabyle yet.
 
 pushd $DS_DIR
+
     CV_KAB="kab.tar.gz"
    
     if [ ! -f "$DATADIR/sources/kab.tar.gz" ]; then

@@ -7,7 +7,11 @@
 # Build Trie
 
 
+set -xe
+
 echo "Create language model"
+
+pushd $DATADIR/extracted
 
 if [ ! -f "$DATADIR/lm/lm.binary" ]; then
 		
@@ -33,5 +37,5 @@ if [ ! -f "$DATADIR/lm/lm.binary" ]; then
 	fi;
 
 
-
+popd
 
