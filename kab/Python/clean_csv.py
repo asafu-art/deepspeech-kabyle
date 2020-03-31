@@ -56,7 +56,7 @@ if __name__ == "__main__":
                         cleanedSentence = tc.cleanSentence(sentence)
 
                         # Writing in vacabulary file
-                        if dataset != "train" and dataset != "dev":
+                        if dataset == "other":
                             if vocab:
                                 vocabulary.write(cleanedSentence + "\n")
 

@@ -14,7 +14,9 @@ echo "Create language model"
 pushd $DATADIR/extracted
 
 if [ ! -f "$DATADIR/lm/lm.binary" ]; then
-		
+
+		wget https://raw.githubusercontent.com/MestafaKamal/kabyle-language-data/master/sentences.txt  && mv sentences.txt $DATADIR/extracted/data/cv_kab/allSentences.txt
+
 		python $HOMEDIR/counter.py $DATADIR/extracted/data/cv_kab/allSentences.txt $DATADIR/extracted/data/cv_kab/top_words.txt 500000
 
 		lmplz	--order 4 \
