@@ -54,20 +54,21 @@ if __name__ == "__main__":
                     for row in reader:
                         sentence = row["transcript"]
                         cleanedSentence = tc.cleanSentence(sentence)
+
                         # Writing in vacabulary file
-                        if vocab:
-                            vocabulary.write(cleanedSentence + "\n")
+                        if dataset != "train" and dataset != "dev":
+                            if vocab:
+                                vocabulary.write(cleanedSentence + "\n")
 
-                        if sentence != cleanedSentence:
-                            fileCleanded += 1
-                            # print("S: ", sentence)
-                            # print("CS:", cleanedSentence)
-                        if cleanedSentence.__contains__("-") and vocab == True:
-                            noTiretSentence = cleanedSentence.replace("-", " ")
-                            # print("-S:", noTiretSentence)
-                            fileStripped += 1
-                            vocabulary.write(noTiretSentence + "\n")
-
+                            if sentence != cleanedSentence:
+                                fileCleanded += 1
+                                # print("S: ", sentence)
+                                # print("CS:", cleanedSentence)
+                            if cleanedSentence.__contains__("-") and vocab == True:
+                                noTiretSentence = cleanedSentence.replace("-", " ")
+                                # print("-S:", noTiretSentence)
+                                fileStripped += 1
+                                vocabulary.write(noTiretSentence + "\n")
                         writer.writerow(
                             {
                                 "wav_filename": row["wav_filename"],
