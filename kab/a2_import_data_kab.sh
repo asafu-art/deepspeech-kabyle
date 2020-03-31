@@ -39,4 +39,4 @@ popd
 
 echo "Clean csv files"
 
-python3 ${MODEL_LANGUAGE}/Python/clean_csv.py --csv_dir $DATADIR/extracted/data/cv_kab/clips --vocabulary_file $DATADIR/extracted/data/cv_kab/allSentences.txt
+python3 ${MODEL_LANGUAGE}/Python/clean_csv.py --csv_dir $DATADIR/extracted/data/cv_kab/clips --vocabulary_file $DATADIR/extracted/data/cv_kab/cvSentences.txt
