@@ -90,7 +90,6 @@ if __name__ == "__main__":
                 temp_file.close()
                 shutil.move(temp_file.name, input_csv)
 
-        vocabulary.close()
         print()
         print("Cleaning complete")
         print("Treated sentence:", totalTreated)
