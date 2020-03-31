@@ -11,8 +11,6 @@ echo "Emport kabyle data"
 # back-up the CV files
 # clean the CSVs
 # Replace not allowed letters
-# Duplicate sentences containing the character "-"
-# Produce the allSentences.txt files
 
 
 # alphabet.txt contains the allowed letters in the wavs' transcipts plus some extra-letters.
