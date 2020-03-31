@@ -1,8 +1,7 @@
 #!/bin/sh
 # created by Mestafa Kamal
 
-# Build allSentences.txt file from csv
-# duplicate sentences containing "-"
+
 # build language model
 # Build Trie
 
