@@ -14,7 +14,7 @@ pushd $DATADIR/extracted
 
 if [ ! -f "$DATADIR/lm/lm.binary" ]; then
 
-		wget https://raw.githubusercontent.com/MestafaKamal/kabyle-language-data/master/sentences.txt  && mv sentences.txt $DATADIR/extracted/data/cv_kab/tatoebaSentences.txt
+		wget https://raw.githubusercontent.com/MestafaKamal/kabyle-language-data/master/tatoebaSentences.txt  && mv sentences.txt $DATADIR/extracted/data/cv_kab/tatoebaSentences.txt
 
 		cat $DATADIR/extracted/data/cv_kab/cvSentences.txt $DATADIR/extracted/data/cv_kab/tatoebaSentences.txt > $DATADIR/extracted/data/cv_kab/allSentences.txt
 
