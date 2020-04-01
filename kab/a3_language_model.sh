@@ -14,7 +14,7 @@ pushd $DATADIR/extracted
 
 if [ ! -f "$DATADIR/lm/lm.binary" ]; then
 
-		wget https://raw.githubusercontent.com/MestafaKamal/kabyle-language-data/master/tatoebaSentences.txt  && mv sentences.txt $DATADIR/extracted/data/cv_kab/tatoebaSentences.txt
+		wget https://raw.githubusercontent.com/MestafaKamal/kabyle-language-data/master/sentences.txt  && mv sentences.txt $DATADIR/extracted/data/cv_kab/tatoebaSentences.txt
 
 		cat $DATADIR/extracted/data/cv_kab/cvSentences.txt $DATADIR/extracted/data/cv_kab/tatoebaSentences.txt > $DATADIR/extracted/data/cv_kab/allSentences.txt
 
@@ -24,8 +24,7 @@ if [ ! -f "$DATADIR/lm/lm.binary" ]; then
 			--temp_prefix $DATADIR/tmp/ \
 			--text $DATADIR/extracted/data/cv_kab/allSentences.txt \
 			--arpa $DATADIR/lm/kab_words.arpa \
-			--skip_symbols \
-			--o 3
+			--skip_symbols 
 
 		filter single model:$DATADIR/lm/kab_words.arpa $DATADIR/lm/lm_kab_filtered.arpa < $DATADIR/extracted/data/cv_kab/top_words.txt
 
