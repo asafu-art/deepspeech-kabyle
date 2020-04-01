@@ -1,7 +1,7 @@
-#!/bin/sh
+#!/bin/bash
 
 echo "Check DeepSpeech"
-
+s
 pushd $DS_DIR
 
     all_train_csv="$(find $DATADIR/extracted/data/ -type f -name '*train.csv' -printf '%p,' | sed -e 's/,$//g')"

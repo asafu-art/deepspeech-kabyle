@@ -3,9 +3,6 @@
 
 set -xe
 
-export PATH=$(dirname "$0"):$PATH
-
-env
 
 ${MODEL_LANGUAGE}/a2_import_data_kab.sh
 

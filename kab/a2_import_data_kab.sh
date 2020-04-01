@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # created by Mestafa Kamal
 
 # This script launches the tsv cleaing program and imports the vocal corpus
