@@ -9,5 +9,7 @@ env
 export TMP=/mnt/tmp
 export TEMP=/mnt/tmp
 
+sudo /sbin/ldconfig
+
 ${MODEL_LANGUAGE}/run.sh
 
