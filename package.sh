@@ -6,13 +6,15 @@ pushd /$DATADIR
 
     if [ ! -f "model_tensorflow_kab.tar.xz" ]; then
             tar -cf - \
-                -C $DATADIR/models/ output_graph.pbmm alphabet.txt \
+                -C $DATADIR/models/ output_graph.pbmm  \
+                -C $HOMEDIR/${MODEL_LANGUAGE}/data_kab/ alphabet.txt \
                 -C $DATADIR/lm/ lm.binary trie | xz -T0 > model_tensorflow_kab.tar.xz
         fi;
 
         if [ ! -f "model_tflite_kab.tar.xz" ]; then
             tar -cf - \
-                -C $DATADIR/models/ output_graph.tflite alphabet.txt \
+                -C $DATADIR/models/ output_graph.tflite \
+                -C $HOMEDIR/${MODEL_LANGUAGE}/data_kab/ alphabet.txt \
                 -C $DATADIR/lm/ lm.binary trie | xz -T0 > model_tflite_kab.tar.xz
         fi;
         
