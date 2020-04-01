@@ -25,6 +25,7 @@ if [ ! -f "$DATADIR/lm/lm.binary" ]; then
 			--text $DATADIR/extracted/data/cv_kab/allSentences.txt \
 			--arpa $DATADIR/lm/kab_words.arpa \
 			--skip_symbols 
+			--prune 0 0 1
 
 		filter single model:$DATADIR/lm/kab_words.arpa $DATADIR/lm/lm_kab_filtered.arpa < $DATADIR/extracted/data/cv_kab/top_words.txt
 
