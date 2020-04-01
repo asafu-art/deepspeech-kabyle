@@ -4,7 +4,7 @@ echo "Check DeepSpeech"
 
 pushd $DS_DIR
 
-  all_train_csv="$(find $DATADIR/extracted/data/ -type f -name '*train.csv' -printf '%p,' | sed -e 's/,$//g')"
+    all_train_csv="$(find $DATADIR/extracted/data/ -type f -name '*train.csv' -printf '%p,' | sed -e 's/,$//g')"
 	all_dev_csv="$(find $DATADIR/extracted/data/ -type f -name '*dev.csv' -printf '%p,' | sed -e 's/,$//g')"
 	all_test_csv="$(find $DATADIR/extracted/data/ -type f -name '*test.csv' -printf '%p,' | sed -e 's/,$//g')"
 
@@ -22,19 +22,19 @@ python -u DeepSpeech.py \
 			--alphabet_config_path $HOMEDIR/${MODEL_LANGUAGE}/data_kab/alphabet.txt \
 			--lm_binary_path $DATADIR/lm/lm.binary \
 			--lm_trie_path $DATADIR/lm/trie \			
-      --train_files ${all_train_csv} \
+			--train_files ${all_train_csv} \
 			--dev_files ${all_dev_csv} \
 			--test_files ${all_test_csv} \			
-      --train_batch_size ${BATCH_SIZE} \
+			--train_batch_size ${BATCH_SIZE} \
 			--dev_batch_size ${BATCH_SIZE} \
 			--test_batch_size ${BATCH_SIZE} \
 			--n_hidden ${N_HIDDEN} \
 			--epochs ${EPOCHS} \
 			--learning_rate ${LEARNING_RATE} \
 			--dropout_rate ${DROPOUT} \
-      ${EARLY_STOP_FLAG} \
+			${EARLY_STOP_FLAG} \
 			--checkpoint_dir $DATADIR/checkpoints\
-      --export_dir .$DATADIR/models/model_export/
+			--export_dir .$DATADIR/models/model_export/
 
 popd
 
