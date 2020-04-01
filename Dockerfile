@@ -111,6 +111,12 @@ RUN pip install `python util/taskcluster.py --decoder`
 
 RUN python3 util/taskcluster.py --target native_client/
 
+RUN TASKCLUSTER_SCHEME="https://community-tc.services.mozilla.com/api/index/v1/task/project.deepspeech.tensorflow.pip.%(branch_name)s.%(arch_string)s/artifacts/public/%(artifact_name)s" python util/taskcluster.py \
+	--target="$(pwd)" \
+	--artifact="convert_graphdef_memmapped_format" \
+	--branch="r1.15" && chmod +x convert_graphdef_memmapped_format
+
+
 WORKDIR $HOMEDIR
 
 ENV PATH="$HOMEDIR/kenlm/build/bin/:$PATH"
