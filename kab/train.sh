@@ -21,10 +21,10 @@ python -u DeepSpeech.py \
 			--automatic_mixed_precision True \
 			--alphabet_config_path $HOMEDIR/${MODEL_LANGUAGE}/data_kab/alphabet.txt \
 			--lm_binary_path $DATADIR/lm/lm.binary \
-			--lm_trie_path $DATADIR/lm/trie \			
+			--lm_trie_path $DATADIR/lm/trie \
 			--train_files ${all_train_csv} \
 			--dev_files ${all_dev_csv} \
-			--test_files ${all_test_csv} \			
+			--test_files ${all_test_csv} \
 			--train_batch_size ${BATCH_SIZE} \
 			--dev_batch_size ${BATCH_SIZE} \
 			--test_batch_size ${BATCH_SIZE} \
