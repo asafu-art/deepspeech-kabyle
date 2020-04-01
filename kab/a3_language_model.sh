@@ -30,7 +30,7 @@ if [ ! -f "$DATADIR/lm/lm.binary" ]; then
 		filter single model:$DATADIR/lm/kab_words.arpa $DATADIR/lm/lm_kab_filtered.arpa < $DATADIR/extracted/data/cv_kab/top_words.txt
 
 		build_binary -a 255 \
-			-T  \
+			-T \
             -s \
 			$DATADIR/lm/lm_kab_filtered.arpa \
 			$DATADIR/lm/lm.binary		
