@@ -69,7 +69,7 @@ pushd $DS_DIR
 			--checkpoint_dir $DATADIR/checkpoints/ \
 			--export_dir $DATADIR/models/ \
 			--export_tflite \
-			--export_language "fra"
+			--export_language "kab"
 	fi;
 
 	if [ ! -f "$DATADIR/models/kab-kab.zip" ]; then
