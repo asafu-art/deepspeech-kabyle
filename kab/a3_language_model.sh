@@ -22,6 +22,7 @@ if [ ! -f "$DATADIR/lm/lm.binary" ]; then
 
 		lmplz	--order 4 \
 			--temp_prefix $DATADIR/tmp/ \
+			--memory 80% \
 			--text $DATADIR/extracted/data/cv_kab/allSentences.txt \
 			--arpa $DATADIR/lm/kab_words.arpa \
 			--skip_symbols \
