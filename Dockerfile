@@ -25,7 +25,7 @@ ENV LANG=C.UTF-8
 # Avoid keyboard-configuration step
 ENV DEBIAN_FRONTEND noninteractive
 
-ENV HOMEDIR /home/KabyleDS
+ENV HOMEDIR /home/train
 ENV DATADIR /mnt
 
 ENV VIRTUAL_ENV_NAME ds-train
