@@ -32,6 +32,7 @@ if [ ! -f "$DATADIR/lm/lm.binary" ]; then
 
 		build_binary -a 255 \
 			-q 8 \
+			trie \
 			-T \
 			-s \
 			$DATADIR/lm/lm_kab_filtered.arpa \
