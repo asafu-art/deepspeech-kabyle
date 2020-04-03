@@ -1,6 +1,7 @@
 FROM nvidia/cuda:10.0-cudnn7-runtime-ubuntu18.04
 
 ARG ds_repo=MestafaKamal/DeepSpeech
+ARG cc_repo=MestafaKamal/CorporaCreator
 ARG kenlm_repo=kpu/kenlm
 ARG kenlm_branch=2ad7cb56924cd3c6811c604973f592cb5ef604eb
 
@@ -31,6 +32,7 @@ ENV DATADIR /mnt
 ENV VIRTUAL_ENV_NAME ds-train
 ENV VIRTUAL_ENV $HOMEDIR/$VIRTUAL_ENV_NAME
 ENV DS_DIR $HOMEDIR/ds
+ENV CC_DIR $HOMEDIR/cc
 
 ENV DS_BRANCH=$ds_branch
 ENV DS_SHA1=$ds_sha1
@@ -118,6 +120,15 @@ RUN TASKCLUSTER_SCHEME="https://community-tc.services.mozilla.com/api/index/v1/t
 	--artifact="convert_graphdef_memmapped_format" \
 	--branch="r1.15" && chmod +x convert_graphdef_memmapped_format
 
+WORKDIR $HOMEDIR
+
+RUN git clone https://github.com/$cc_repo.git $DS_DIR
+
+WORKDIR $CC_DIR
+
+RUN pip install -r requirements.txt
+
+RUN python3 setup.py install 
 
 WORKDIR $HOMEDIR
 
@@ -125,7 +136,6 @@ ENV PATH="$HOMEDIR/kenlm/build/bin/:$PATH"
 
 # Copy now so that docker build can leverage caches
 COPY --chown=trainer:trainer run.sh counter.py $HOMEDIR/
-
 
 COPY --chown=trainer:trainer ${MODEL_LANGUAGE}/*.sh $HOMEDIR/${MODEL_LANGUAGE}/
 

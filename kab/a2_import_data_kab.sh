@@ -24,12 +24,18 @@ pushd $DS_DIR
 		exit 1
 	fi;
 
+	if [ ! -f "$DATADIR/sources/clips.tsv" ]; then
+		exit 1
+	fi;
 
 if [ ! -f "$DATADIR/extracted/data/cv_kab/clips/train.csv" ]; then
 		mkdir -p $DATADIR/extracted/data/cv_kab/ || true
 
 		tar -C $DATADIR/extracted/data/cv_kab/ -xf $DATADIR/sources/kab.tar.gz
 
+		create-corpora -d $DATADIR/extracted/corpora -f $DATADIR/sources/clips.tsv -l kab -s 2
+
+		mv $DATADIR/extracted/corpora/kab/*.tsv $DATADIR/extracted/data/cv_kab/
 
 		python bin/import_cv2.py ${IMPORT_AS_ENGLISH} --filter_alphabet $HOMEDIR/${MODEL_LANGUAGE}/data_kab/alphabet.txt $DATADIR/extracted/data/cv_kab/
 	fi;
@@ -37,4 +43,4 @@ popd
 
 echo "Clean csv files"
 
-python3 ${MODEL_LANGUAGE}/Python/clean_csv.py --csv_dir $DATADIR/extracted/data/cv_kab/clips --vocabulary_file $DATADIR/extracted/data/cv_kab/cvSentences.txt
+python3 ${MODEL_LANGUAGE}/Python/clean_tsv.py --tsv_file $DATADIR/extracted/data/cv_kab --vocabulary_file $DATADIR/extracted/data/cv_kab/cvSentences.txt
