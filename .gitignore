@@ -7,3 +7,4 @@ pre_processing/csv/
 data_kab/lm/
 models/
 tests/
+*__pycache__/*
