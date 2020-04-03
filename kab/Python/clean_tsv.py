@@ -46,7 +46,7 @@ if __name__ == "__main__":
                     input_tsv, "rt", encoding="utf-8"
                 ) as input_tsv_file:
                     reader = csv.DictReader(input_tsv_file, delimiter="\t")
-                    i = 0              
+                              
                     for row in reader:
                         sentence = row["sentence"]
                         cleanedSentence = tc.cleanSentence(sentence)
@@ -66,10 +66,7 @@ if __name__ == "__main__":
                             fileStripped += 1
                             vocabulary.write(noTiretSentence + "\n")
                     
-                        fileTreated += 1
-                        i += 1
-                        if i == 10:
-                            break
+                        fileTreated += 1                        
 
                     print("Treated sentences:", fileTreated)
                     totalTreated += fileTreated
@@ -79,8 +76,10 @@ if __name__ == "__main__":
                     totalStripped += fileStripped                
                 input_tsv_file.close()            
 
+        """
         print()
         print("Cleaning complete")
         print("Treated sentence:", totalTreated)
         print("Cleanded sentences:", totalCleaned)
         print("Stripped sentences:", totalStripped)
+        """
