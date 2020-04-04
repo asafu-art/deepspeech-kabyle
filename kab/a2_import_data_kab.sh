@@ -25,7 +25,7 @@ pushd $DS_DIR
 	fi;
 
 	if [ ! -f "$DATADIR/sources/clips.tsv" ]; then
-		exit 1
+		exit 2
 	fi;
 
 if [ ! -f "$DATADIR/extracted/data/cv_kab/clips/train.csv" ]; then
