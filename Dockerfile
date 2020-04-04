@@ -122,7 +122,7 @@ RUN TASKCLUSTER_SCHEME="https://community-tc.services.mozilla.com/api/index/v1/t
 
 WORKDIR $HOMEDIR
 
-RUN git clone https://github.com/$cc_repo.git $DS_DIR
+RUN git clone https://github.com/$cc_repo.git $CC_DIR
 
 WORKDIR $CC_DIR
 
