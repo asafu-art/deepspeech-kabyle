@@ -33,7 +33,7 @@ if [ ! -f "$DATADIR/extracted/data/cv_kab/clips/train.csv" ]; then
 
 		tar -C $DATADIR/extracted/data/cv_kab/ -xf $DATADIR/sources/kab.tar.gz
 
-		create-corpora -d $DATADIR/extracted/corpora -f $DATADIR/sources/clips.tsv -l kab -s 2
+		create-corpora -d $DATADIR/extracted/corpora -f $DATADIR/extracted/data/cv_kab/validated.tsv -l kab -s 2
 
 		mv $DATADIR/extracted/corpora/kab/*.tsv $DATADIR/extracted/data/cv_kab/
 
