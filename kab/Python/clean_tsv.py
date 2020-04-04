@@ -56,13 +56,13 @@ if __name__ == "__main__":
                         if vocab:
                             vocabulary.write(cleanedSentence + "\n")
 
-                        print("S :", sentence)
+                        #print("S :", sentence)
                         if sentence != cleanedSentence:
                             fileCleanded += 1                            
-                            print("CS:", cleanedSentence)
+                            #print("CS:", cleanedSentence)
                         if cleanedSentence.__contains__("-") and vocab == True:
                             noTiretSentence = cleanedSentence.replace("-", " ")
-                            print("-S:", noTiretSentence)
+                            #print("-S:", noTiretSentence)
                             fileStripped += 1
                             vocabulary.write(noTiretSentence + "\n")
                     
