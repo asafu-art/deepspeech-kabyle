@@ -8,3 +8,4 @@ data_kab/lm/
 models/
 tests/
 *__pycache__/*
+help.txt
