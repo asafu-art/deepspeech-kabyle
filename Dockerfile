@@ -17,6 +17,9 @@ ARG lm_beta=1.45
 ARG beam_width=500
 ARG early_stop=1
 
+ARG duplicate_sentence_count=2
+
+
 ARG lm_evaluate_range=
 ARG english_compatible=0
 
@@ -47,6 +50,8 @@ ENV DROPOUT=$dropout
 ENV LM_ALPHA=$lm_alpha
 ENV LM_BETA=$lm_beta
 ENV BEAM_WIDTH=$beam_width
+
+ENV DUPLICATE_SENTENCE_COUNT=$duplicate_sentence_count
 
 ENV LM_EVALUATE_RANGE=$lm_evaluate_range
 ENV ENGLISH_COMPATIBLE=$english_compatible
