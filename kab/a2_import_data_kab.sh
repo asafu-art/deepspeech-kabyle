@@ -24,10 +24,6 @@ pushd $DS_DIR
 		exit 1
 	fi;
 
-	if [ ! -f "$DATADIR/sources/clips.tsv" ]; then
-		exit 2
-	fi;
-
 if [ ! -f "$DATADIR/extracted/data/cv_kab/clips/train.csv" ]; then
 		mkdir -p $DATADIR/extracted/data/cv_kab/ || true
 
