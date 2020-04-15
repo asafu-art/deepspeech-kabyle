@@ -15,8 +15,15 @@ pushd $DATADIR/extracted
 if [ ! -f "$DATADIR/lm/lm.binary" ]; then
 		
 		wget https://raw.githubusercontent.com/MestafaKamal/kabyle-language-data/master/tatoebaSentences.txt -P $DATADIR/extracted/data/cv_kab/
+
+		wget https://raw.githubusercontent.com/MestafaKamal/kabyle-language-data/master/isefra.txt -P $DATADIR/extracted/data/cv_kab/
+
+		wget https://raw.githubusercontent.com/MestafaKamal/kabyle-language-data/master/imedyazen.txt -P $DATADIR/extracted/data/cv_kab/
+
+		wget https://raw.githubusercontent.com/MestafaKamal/kabyle-language-data/master/wiki.kab.txt -P $DATADIR/extracted/data/cv_kab/
 		
-		cat $DATADIR/extracted/data/cv_kab/cvSentences.txt $DATADIR/extracted/data/cv_kab/tatoebaSentences.txt > $DATADIR/extracted/data/cv_kab/allSentences.txt
+	
+		cat $DATADIR/extracted/data/cv_kab/wiki.kab.txt $DATADIR/extracted/data/cv_kab/imedyazen.txt $DATADIR/extracted/data/cv_kab/isefra.txt $DATADIR/extracted/data/cv_kab/cvSentences.txt $DATADIR/extracted/data/cv_kab/tatoebaSentences.txt > $DATADIR/extracted/data/cv_kab/allSentences.txt
 
 		python $HOMEDIR/counter.py $DATADIR/extracted/data/cv_kab/allSentences.txt $DATADIR/extracted/data/cv_kab/top_words.txt 500000
 
