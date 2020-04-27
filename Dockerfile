@@ -140,7 +140,7 @@ WORKDIR $HOMEDIR
 ENV PATH="$HOMEDIR/kenlm/build/bin/:$PATH"
 
 # Copy now so that docker build can leverage caches
-COPY --chown=trainer:trainer run.sh counter.py $HOMEDIR/
+COPY --chown=trainer:trainer run.sh counter.py package.sh $HOMEDIR/
 
 COPY --chown=trainer:trainer ${MODEL_LANGUAGE}/*.sh $HOMEDIR/${MODEL_LANGUAGE}/
 
