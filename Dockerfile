@@ -17,8 +17,7 @@ ARG lm_beta=1.45
 ARG beam_width=500
 ARG early_stop=1
 
-ARG duplicate_sentence_count=2
-
+ARG duplicate_sentence_count=1
 
 ARG lm_evaluate_range=
 ARG english_compatible=0
