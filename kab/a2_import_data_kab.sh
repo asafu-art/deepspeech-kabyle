@@ -14,6 +14,7 @@ pushd $DS_DIR
 	fi;
 
 if [ ! -f "$DATADIR/extracted/data/cv_kab/clips/train.csv" ]; then
+		
 		mkdir -p $DATADIR/extracted/data/cv_kab/ || true
 
 		tar -C $DATADIR/extracted/data/cv_kab/ -xf $DATADIR/sources/kab.tar.gz
@@ -21,7 +22,7 @@ if [ ! -f "$DATADIR/extracted/data/cv_kab/clips/train.csv" ]; then
 		if [ ${DUPLICATE_SENTENCE_COUNT} -gt 1 ]; then 
 		
 			create-corpora -d $DATADIR/extracted/corpora -f $DATADIR/extracted/data/cv_kab/validated.tsv -l kab -s ${DUPLICATE_SENTENCE_COUNT}
-			
+
 			mv $DATADIR/extracted/corpora/kab/*.tsv $DATADIR/extracted/data/cv_kab/
 		
 		fi;
