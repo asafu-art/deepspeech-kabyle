@@ -18,9 +18,13 @@ if [ ! -f "$DATADIR/extracted/data/cv_kab/clips/train.csv" ]; then
 
 		tar -C $DATADIR/extracted/data/cv_kab/ -xf $DATADIR/sources/kab.tar.gz
 
-		create-corpora -d $DATADIR/extracted/corpora -f $DATADIR/extracted/data/cv_kab/validated.tsv -l kab -s ${DUPLICATE_SENTENCE_COUNT}
-
-		mv $DATADIR/extracted/corpora/kab/*.tsv $DATADIR/extracted/data/cv_kab/
+		if [ ${DUPLICATE_SENTENCE_COUNT} -gt 1 ]; then 
+		
+			create-corpora -d $DATADIR/extracted/corpora -f $DATADIR/extracted/data/cv_kab/validated.tsv -l kab -s ${DUPLICATE_SENTENCE_COUNT}
+			
+			mv $DATADIR/extracted/corpora/kab/*.tsv $DATADIR/extracted/data/cv_kab/
+		
+		fi;
 
 		python bin/import_cv2.py ${IMPORT_AS_ENGLISH} --filter_alphabet $HOMEDIR/${MODEL_LANGUAGE}/data_kab/alphabet.txt $DATADIR/extracted/data/cv_kab/
 	fi;
