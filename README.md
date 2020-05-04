@@ -35,3 +35,15 @@ Should ou have your dataset in /mnt for unstance, run the image as following
 ```
 docker run --tty --mount type=bind,src=PATH-TO-HOST-DIRECTORY,dst=/mnt dskabyle
 ```
+
+### Models and results
+
+Models and training intermediate data are to be found in your host directory. 
+
+Subdirectory `models/` contains the generated model `output_graph.pb`. However such a file needs to beloaded in memory when running inferene. 
+
+Therefore, additionnal models in tflite format, to be run on mobile devices, and mmap-able format, to read data directly from disk, are generated as well. 
+
+Training intermidiate data are kept in `checkpoints/` subdirectory. The purpose of checkpoints is to allow interruption and later resume training.
+
+For further information, be pleased to consult [DeepSpeech Documentation](https://deepspeech.readthedocs.io/en/v0.6.1)
