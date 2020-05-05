@@ -22,7 +22,7 @@ docker build -t dskabyle .
 Parameters for the model:
 - `batch_size` : ( default 96 ) to specify the batch size for training, dev and test dataset
 - `n_hidden` : ( default 2048 ) to specify the number of units in the first layer
-- `epoch` : ( default 75 ) to specify the number of epochs to run training for
+- `epochs` : ( default 75 ) to specify the number of epochs to run training for
 - `learning_rate` : ( default 0.001 ) to define the learning rate of the neural network
 - `dropout` : ( default 0.05 ) to define the dropout applied
 - `lm_alpha`, `lm_beta` : ( default 0.66 and 1.45 respectively) define language model alpha and beta parameters
@@ -45,7 +45,7 @@ Using environment variables, use the following commad tu run the image, with a d
 ```
 docker run --tty 
 --mount type=bind,src=PATH-TO-HOST-DIRECTORY,dst=/mnt 
--e EPOCH=50
+-e EPOCHS=50
 dskabyle
 ```
 
