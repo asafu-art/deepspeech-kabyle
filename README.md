@@ -59,4 +59,4 @@ Therefore, additionnal models in tflite format, to be run on mobile devices, and
 
 Training intermidiate data are kept in `checkpoints/` subdirectory. The purpose of checkpoints is to allow interruption and later resume training.
 
-For further information, be pleased to consult [DeepSpeech Documentation](https://deepspeech.readthedocs.io/en/v0.6.1)
+For further information, be pleased to consult [DeepSpeech Documentation](https://deepspeech.readthedocs.io/en/v0.6.1).
