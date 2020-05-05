@@ -9,6 +9,7 @@ This Readme is written for [DeepSpeech](https://github.com/mozilla/DeepSpeech/re
 ### Prerequisites 
 - A running setuo of `NVIDIA Docker`
 - A host directory with 100 GB at least for training and producing intermediate data
+- Host directory must be writable by `trainer` user (uid 999) (User defined in the Dockerfile)
 - Kabyle Common Voice dataset `kab.tar.gz` from <https://voice.mozilla.org/kab/datasets> inside  `sources/`subdirectory of your host directory 
 
 ### Build the image
@@ -30,7 +31,8 @@ These training parameters can always be modified at runtime using Docker environ
 
 ### Run the image 
 
-Should ou have your dataset in /mnt for unstance, run the image as following 
+Should you have got yout host directory contaning  the needed dataset, it is to be mounted when running the Docker image. Il will contain intermediate files, chackpoints and the final generated model files.
+
 
 ```
 docker run --tty --mount type=bind,src=PATH-TO-HOST-DIRECTORY,dst=/mnt dskabyle
