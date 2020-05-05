@@ -20,12 +20,15 @@ docker build -t dskabyle .
 ### Parameters
 
 Parameters for the model:
-- `batch_size` : to specify the batch size for training, dev and test dataset
-- `epoch` : to specify the number of epochs to run training for
-- `learning_rate` : to define the learning rate of the neural network
-- `dropout` :  to define the dropout applied
-- `lm_alpha`, `lm_beta` :  define language model alpha and beta parameters
-
+- `batch_size` : ( default 96 ) to specify the batch size for training, dev and test dataset
+- `n_hidden` : ( default 2048 ) to specify the number of units in the first layer
+- `epoch` : ( default 75 ) to specify the number of epochs to run training for
+- `learning_rate` : ( default 0.001 ) to define the learning rate of the neural network
+- `dropout` : ( default 0.05 ) to define the dropout applied
+- `lm_alpha`, `lm_beta` : ( default 0.66 and 1.45 respectively) define language model alpha and beta parameters
+- `beam_width` : ( default 500 ) to define the beam width used by the decoder
+- `early_stop` : ( default 1 ) to indicate early stop during training to avoid overfitting 
+- `duplicate_sentence_count` : ( default 1 ) to specify the maximum number of times a sentence can appear in the common-voice corpus
 
 These training parameters can always be modified at runtime using Docker environment variables.
 
@@ -36,6 +39,14 @@ Should you have got yout host directory contaning  the needed dataset, it is to 
 
 ```
 docker run --tty --mount type=bind,src=PATH-TO-HOST-DIRECTORY,dst=/mnt dskabyle
+```
+Using environment variables, use the following commad tu run the image, with a différent number of epochs for instance.
+
+```
+docker run --tty 
+--mount type=bind,src=PATH-TO-HOST-DIRECTORY,dst=/mnt 
+-e EPOCH=50
+dskabyle
 ```
 
 ### Models and results
