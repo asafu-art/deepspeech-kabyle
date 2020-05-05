@@ -7,7 +7,7 @@ This Readme is written for [DeepSpeech](https://github.com/mozilla/DeepSpeech/re
 ## Get Started
 
 ### Prerequisites 
-- A running setuo of `NVIDIA Docker`
+- A running setup of `NVIDIA Docker`
 - A host directory with 100 GB at least for training and producing intermediate data
 - Host directory must be writable by `trainer` user (uid 999) (User defined in the Dockerfile)
 - Kabyle Common Voice dataset `kab.tar.gz` from <https://voice.mozilla.org/kab/datasets> inside  `sources/`subdirectory of your host directory 
