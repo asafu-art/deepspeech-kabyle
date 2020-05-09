@@ -20,13 +20,14 @@ docker build -t dskabyle .
 ### Parameters
 
 Parameters for the model:
-- `batch_size` : ( default 96 ) to specify the batch size for training, dev and test dataset
-- `n_hidden` : ( default 2048 ) to specify the number of units in the first layer
+- `batch_size` : ( default 96 ) to specify the number of elements un a batch for training, dev and test dataset
+- `n_hidden` : ( default 2048 ) to specify the layer width to use when initialising layers
 - `epochs` : ( default 75 ) to specify the number of epochs to run training for
-- `learning_rate` : ( default 0.001 ) to define the learning rate of the neural network
-- `dropout` : ( default 0.05 ) to define the dropout applied
-- `lm_alpha`, `lm_beta` : ( default 0.66 and 1.45 respectively) define language model alpha and beta parameters
-- `beam_width` : ( default 500 ) to define the beam width used by the decoder
+- `learning_rate` : ( default 0.001 ) to define the learning rate of Adam optimizer
+- `dropout` : ( default 0.05 ) to define the applied dropout rate for feedforward layers 
+- `lm_alpha`: ( default 0.66 ) define the alpha hyperparameters of the CTC decoder. Language Model weight. Word insertion weight.
+- `lm_beta` : ( default 1.45 ) define the beta hyperparameters of the CTC decoder 
+- `beam_width` : ( default 500 ) to define the beam width used in the CTC decoder when building candidate transcriptions
 - `early_stop` : ( default 1 ) to indicate early stop during training to avoid overfitting 
 - `duplicate_sentence_count` : ( default 1 ) to specify the maximum number of times a sentence can appear in the common-voice corpus
 
