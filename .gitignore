@@ -1,11 +1,4 @@
-DeepSpeech
-DeepSpeech-0.6.1/
-cv_kab/
-tmp/
 .vscode/
-pre_processing/csv/
-data_kab/lm/
-models/
 tests/
 *__pycache__/*
 help.txt
