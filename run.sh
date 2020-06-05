@@ -13,4 +13,4 @@ sudo /sbin/ldconfig
 
 ${MODEL_LANGUAGE}/run.sh
 
-package.sh
+$HOMEDIR/package.sh
