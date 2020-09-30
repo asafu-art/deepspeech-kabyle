@@ -3,6 +3,15 @@
 
 set -xe
 
+${MODEL_LANGUAGE}/params.sh
+
+if [ -x "${MODEL_LANGUAGE}/metadata.sh" ]; then
+	. ${MODEL_LANGUAGE}/metadata.sh
+else
+	echo "Please prepare metadata informations."
+	exit 1
+fi;
+
 
 ${MODEL_LANGUAGE}/a2_import_data_kab.sh
 
