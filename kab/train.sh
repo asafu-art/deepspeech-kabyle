@@ -1,28 +1,56 @@
 #!/bin/bash
 
-echo "Check DeepSpeech"
+set -xe
 
 pushd $DS_DIR
 
-	all_train_csv="$(find $DATADIR/extracted/data/ -type f -name '*train.csv' -printf '%p,' | sed -e 's/,$//g')"
-	all_dev_csv="$(find $DATADIR/extracted/data/ -type f -name '*dev.csv' -printf '%p,' | sed -e 's/,$//g')"
-	all_test_csv="$(find $DATADIR/extracted/data/ -type f -name '*test.csv' -printf '%p,' | sed -e 's/,$//g')"
+	all_train_csv="$(find /mnt/extracted/data/ -type f -name '*train.csv' -printf '%p,' | sed -e 's/,$//g')"
+	all_dev_csv="$(find /mnt/extracted/data/ -type f -name '*dev.csv' -printf '%p,' | sed -e 's/,$//g')"
+	all_test_csv="$(find /mnt/extracted/data/ -type f -name '*test.csv' -printf '%p,' | sed -e 's/,$//g')"
 
-	mkdir -p $DATADIR/sources/feature_cache || true
+	mkdir -p /mnt/sources/feature_cache || true
 
-	if [ ! -f "$DATADIR/checkpoints/best_dev_checkpoint" ]; then
-		EARLY_STOP_FLAG="--early_stop"
-				if [ "${EARLY_STOP}" = "0" ]; then
-					EARLY_STOP_FLAG="--noearly_stop"
-				fi;
+	if [ -f "/transfer-checkpoint/checkpoint" -a ! -f "/mnt/models/output_graph.pb" ]; then
+		echo "Using checkpoint from ${TRANSFER_CHECKPOINT}"
+		cp -a /transfer-checkpoint/* /mnt/checkpoints/
+	fi;
+
+	EARLY_STOP_FLAG="--early_stop"
+	if [ "${EARLY_STOP}" = "0" ]; then
+		EARLY_STOP_FLAG="--noearly_stop"
+	fi;
+
+	AMP_FLAG=""
+	if [ "${AMP}" = "1" ]; then
+		AMP_FLAG="--automatic_mixed_precision True"
+	fi;
+
+	
+	if [ -z "$METADATA_AUTHOR" ]; then
+		echo "Please fill-in metadata informations"
+		exit 1
+	fi;
+
+	
+	ALL_METADATA_FLAGS="--export_author_id $METADATA_AUTHOR"
+	ALL_METADATA_FLAGS="$ALL_METADATA_FLAGS --export_model_version $METADATA_MODEL_VERSION"
+	ALL_METADATA_FLAGS="$ALL_METADATA_FLAGS --export_contact_info $METADATA_CONTACT_INFO"
+	ALL_METADATA_FLAGS="$ALL_METADATA_FLAGS --export_license $METADATA_LICENSE"
+	ALL_METADATA_FLAGS="$ALL_METADATA_FLAGS --export_language $METADATA_LANGUAGE"
+	ALL_METADATA_FLAGS="$ALL_METADATA_FLAGS --export_min_ds_version $METADATA_MIN_DS_VERSION"
+	ALL_METADATA_FLAGS="$ALL_METADATA_FLAGS --export_max_ds_version $METADATA_MAX_DS_VERSION"
+	ALL_METADATA_FLAGS="$ALL_METADATA_FLAGS --export_description $METADATA_DESCRIPTION"
+
+
+	if [ ! -f "/mnt/checkpoints/best_dev_checkpoint" ]; then		
 
 		python -u DeepSpeech.py \
 				--show_progressbar True \
 				--use_cudnn_rnn True \
-				--automatic_mixed_precision True \
+				${AMP_FLAG} \
 				--alphabet_config_path $HOMEDIR/${MODEL_LANGUAGE}/data_kab/alphabet.txt \
-				--lm_binary_path $DATADIR/lm/lm.binary \
-				--lm_trie_path $DATADIR/lm/trie \
+				--scorer_path /mnt/lm/kenlm.scorer \
+				--feature_cache /mnt/sources/feature_cache \
 				--train_files ${all_train_csv} \
 				--dev_files ${all_dev_csv} \
 				--test_files ${all_test_csv} \
@@ -36,61 +64,82 @@ pushd $DS_DIR
 				--lm_alpha ${LM_ALPHA} \
 				--lm_beta ${LM_BETA} \
 				${EARLY_STOP_FLAG} \
-				--checkpoint_dir $DATADIR/checkpoints/
+				--checkpoint_dir /mnt/checkpoints/
 	fi;
+
+	if [ ! -f "/mnt/models/test_output.json" ]; then
+		
+		python -u DeepSpeech.py \
+			--show_progressbar True \
+			--train_cudnn True \
+			${AMP_FLAG} \
+			--alphabet_config_path $HOMEDIR/${MODEL_LANGUAGE}/data_kab/alphabet.txt \
+			--scorer_path /mnt/lm/kenlm.scorer \
+			--test_files ${all_test_csv} \
+			--test_batch_size ${BATCH_SIZE} \
+			--n_hidden ${N_HIDDEN} \
+			--lm_alpha ${LM_ALPHA} \
+			--lm_beta ${LM_BETA} \
+			--checkpoint_dir /mnt/checkpoints/ \
+			--test_output_file /mnt/models/test_output.json
+	fi;
+
 	
-	if [ ! -f "$DATADIR/models/output_graph.pb" ]; then
+	if [ ! -f "/mnt/models/output_graph.pb" ]; then
+		METADATA_MODEL_NAME_FLAG="--export_model_name $METADATA_MODEL_NAME-tensorflow"
 		python -u DeepSpeech.py \
 			--alphabet_config_path $HOMEDIR/${MODEL_LANGUAGE}/data_kab/alphabet.txt \
-			--lm_binary_path $DATADIR/lm/lm.binary \
-			--lm_trie_path $DATADIR/lm/trie \
-			--feature_cache $DATADIR/sources/feature_cache \
+			--scorer_path /mnt/lm/kenlm.scorer \
+			--feature_cache /mnt/sources/feature_cache \
 			--n_hidden ${N_HIDDEN} \
 			--beam_width ${BEAM_WIDTH} \
 			--lm_alpha ${LM_ALPHA} \
 			--lm_beta ${LM_BETA} \
 			${EARLY_STOP_FLAG} \
-			--load "best" \
-			--checkpoint_dir $DATADIR/checkpoints/ \
-			--export_dir $DATADIR/models/ \
-			--export_language "kab"
+			--load_evaluate "best" \
+			--checkpoint_dir /mnt/checkpoints/ \
+			--export_dir /mnt/models/ \
+			${ALL_METADATA_FLAGS} \
+			${METADATA_MODEL_NAME_FLAG}
 	fi;
-	if [ ! -f "$DATADIR/models/output_graph.tflite" ]; then
+	if [ ! -f "/mnt/models/output_graph.tflite" ]; then
+		METADATA_MODEL_NAME_FLAG="--export_model_name $METADATA_MODEL_NAME-tflite"
 		python -u DeepSpeech.py \
 			--alphabet_config_path $HOMEDIR/${MODEL_LANGUAGE}/data_kab/alphabet.txt \
-			--lm_binary_path $DATADIR/lm/lm.binary \
-			--lm_trie_path $DATADIR/lm/trie \
-			--feature_cache $DATADIR/sources/feature_cache \
+			--scorer_path /mnt/lm/kenlm.scorer \
+			--feature_cache /mnt/sources/feature_cache \
 			--n_hidden ${N_HIDDEN} \
 			--beam_width ${BEAM_WIDTH} \
 			--lm_alpha ${LM_ALPHA} \
 			--lm_beta ${LM_BETA} \
-			--load "best" \
-			--checkpoint_dir $DATADIR/checkpoints/ \
-			--export_dir $DATADIR/models/ \
+			--load_evaluate "best" \
+			--checkpoint_dir /mnt/checkpoints/ \
+			--export_dir /mnt/models/ \
 			--export_tflite \
-			--export_language "kab"
+			${ALL_METADATA_FLAGS} \
+			${METADATA_MODEL_NAME_FLAG}
 	fi;
 
-	if [ ! -f "$DATADIR/models/kab-kab.zip" ]; then
-		mkdir $DATADIR/models/kab-kab || rm $DATADIR/models/kab-kab/*
+	if [ ! -f "/mnt/models/${MODEL_EXPORT_ZIP_LANG}.zip" ]; then
+		mkdir /mnt/models/${MODEL_EXPORT_ZIP_LANG} || rm /mnt/models/${MODEL_EXPORT_ZIP_LANG}/*
+		METADATA_MODEL_NAME_FLAG="--export_model_name $METADATA_MODEL_NAME-tflite"
 		python -u DeepSpeech.py \
 			--alphabet_config_path $HOMEDIR/${MODEL_LANGUAGE}/data_kab/alphabet.txt \
-			--lm_binary_path $DATADIR/lm/lm.binary \
-			--lm_trie_path $DATADIR/lm/trie \
-			--feature_cache $DATADIR/sources/feature_cache \
+			--scorer_path /mnt/lm/kenlm.scorer \
+			--feature_cache /mnt/sources/feature_cache \
 			--n_hidden ${N_HIDDEN} \
 			--beam_width ${BEAM_WIDTH} \
 			--lm_alpha ${LM_ALPHA} \
 			--lm_beta ${LM_BETA} \
-			--load "best" \
-			--checkpoint_dir $DATADIR/checkpoints/ \
-			--export_dir $DATADIR/models/kab-kab \
+			--load_evaluate "best" \
+			--checkpoint_dir /mnt/checkpoints/ \
+			--export_dir /mnt/models/${MODEL_EXPORT_ZIP_LANG} \
 			--export_zip \
-			--export_language "Kabyle (KAB)"
+			${ALL_METADATA_FLAGS} \
+			${METADATA_MODEL_NAME_FLAG}
 	fi;
-	if [ ! -f "$DATADIR/models/output_graph.pbmm" ]; then
-		./convert_graphdef_memmapped_format --in_graph=$DATADIR/models/output_graph.pb --out_graph=$DATADIR/models/output_graph.pbmm
+	if [ ! -f "/mnt/models/output_graph.pbmm" ]; then
+		./convert_graphdef_memmapped_format --in_graph=/mnt/models/output_graph.pb --out_graph=/mnt/models/output_graph.pbmm
 	fi;
 
 popd
