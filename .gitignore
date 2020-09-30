@@ -2,3 +2,4 @@
 tests/
 *__pycache__/*
 help.txt
+kab/a2_import_tatoeba_kab.sh
