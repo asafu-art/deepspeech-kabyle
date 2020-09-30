@@ -2,7 +2,7 @@
 
 This project develops a working Speech-To-Text module for Kabyle language using [Mozilla DeepSpeech](https://github.com/mozilla/DeepSpeech), that can be used for any audio processing pipeline. [Mozilla DeepSpeech](https://github.com/mozilla/DeepSpeech) is an open-source automatic speech recognition (ASR) toolkit based on [Baidu's Deep Speech](https://gigaom2.files.wordpress.com/2014/12/deep_speech3_12_17.pdf) research paper. The DeepSpeech project uses Google's [TensorFlow](https://www.tensorflow.org/) to make the implementation easier.
 
-This Readme is written for [DeepSpeech](https://github.com/mozilla/DeepSpeech/releases/tag/v0.6.1) v0.6.1. Refer to Mozillla [DeepSpeech](https://github.com/mozilla/DeepSpeech) for lastest updates.
+This Readme is written for [DeepSpeech](https://github.com/mozilla/DeepSpeech/releases/tag/v0.8.2) v0.8.2. Refer to Mozillla [DeepSpeech](https://github.com/mozilla/DeepSpeech) for lastest updates.
 
 ## Get Started
 
@@ -60,4 +60,4 @@ Therefore, additional models in tflite format, to be run on mobile devices, and 
 
 Training intermediate data are kept in `checkpoints/` subdirectory. The purpose of checkpoints is to allow interruption and later resume training.
 
-For further information, be pleased to consult [DeepSpeech Documentation](https://deepspeech.readthedocs.io/en/v0.6.1).
+For further information, be pleased to consult [DeepSpeech Documentation](https://deepspeech.readthedocs.io/en/v0.8.2).
