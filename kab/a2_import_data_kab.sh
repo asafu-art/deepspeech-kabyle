@@ -5,32 +5,47 @@
 set -xe
 echo "Emport kabyle data"
 
-pushd $DS_DIR
+if [ -z "${CV_RELEASE_FILENAME}" ]; then
+	echo "Define a CV release"
+	exit 1
+fi;
 
-    CV_KAB="kab.tar.gz"
+pushd $DS_DIR
+    
    
-    if [ ! -f "$DATADIR/sources/kab.tar.gz" ]; then
+    if [ ! -f "/mnt/sources/${CV_RELEASE_FILENAME}" ]; then
 		exit 1
 	fi;
 
-if [ ! -f "$DATADIR/extracted/data/cv_kab/clips/train.csv" ]; then
-		
-		mkdir -p $DATADIR/extracted/data/cv_kab/ || true
+	sha256=$(sha256sum --binary /mnt/sources/${CV_RELEASE_FILENAME} | awk '{ print $1 }')
 
-		tar -C $DATADIR/extracted/data/cv_kab/ -xf $DATADIR/sources/kab.tar.gz
+	if [ "${sha256}" != "${CV_RELEASE_SHA256}" ]; then
+		echo "Invalid Common Voice dataset"
+		exit 1
+	fi;
+
+	if [ "${ENGLISH_COMPATIBLE}" = "1" ]; then
+		IMPORT_AS_ENGLISH="--normalize"
+	fi;
+
+	if [ ! -f "/mnt/extracted/data/cv_kab/clips/train.csv" ]; then
+		
+		mkdir -p /mnt/extracted/data/cv_kab/ || true
+
+		tar -C /mnt/extracted/data/cv_kab/ --strip-components=2 -xf /mnt/sources/${CV_RELEASE_FILENAME}
 
 		if [ ${DUPLICATE_SENTENCE_COUNT} -gt 1 ]; then 
 		
-			create-corpora -d $DATADIR/extracted/corpora -f $DATADIR/extracted/data/cv_kab/validated.tsv -l kab -s ${DUPLICATE_SENTENCE_COUNT}
+			create-corpora -d /mnt/extracted/corpora -f /mnt/extracted/data/cv_kab/validated.tsv -l kab -s ${DUPLICATE_SENTENCE_COUNT}
 
-			mv $DATADIR/extracted/corpora/kab/*.tsv $DATADIR/extracted/data/cv_kab/
+			mv /mnt/extracted/corpora/kab/*.tsv /mnt/extracted/data/cv_kab/
 		
 		fi;
 
-		python bin/import_cv2.py ${IMPORT_AS_ENGLISH} --filter_alphabet $HOMEDIR/${MODEL_LANGUAGE}/data_kab/alphabet.txt $DATADIR/extracted/data/cv_kab/
+		python bin/import_cv2.py \
+		${IMPORT_AS_ENGLISH} \
+		--filter_alphabet $HOMEDIR/${MODEL_LANGUAGE}/data_kab/alphabet.txt \
+		${IMPORTERS_VALIDATE_LOCALE} \
+		/mnt/extracted/data/cv_kab/
 	fi;
 popd
-
-echo "Get unused cv sentences"
-
-python3 ${MODEL_LANGUAGE}/Python/clean_tsv.py --tsv_dir $DATADIR/extracted/data/cv_kab --vocabulary_file $DATADIR/extracted/data/cv_kab/cvSentences.txt
