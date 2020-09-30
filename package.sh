@@ -2,20 +2,20 @@
 
 set -xe
 
-pushd /$DATADIR
+pushd //mnt
 
-    if [ ! -f "model_tensorflow_kab.tar.xz" ]; then
+        if [ ! -f "model_tensorflow_kab.tar.xz" ]; then
             tar -cf - \
-                -C $DATADIR/models/ output_graph.pbmm  \
+                -C /mnt/models/ output_graph.pbmm  \
                 -C $HOMEDIR/${MODEL_LANGUAGE}/data_kab/ alphabet.txt \
-                -C $DATADIR/lm/ lm.binary trie | xz -T0 > model_tensorflow_kab.tar.xz
+                -C /mnt/lm/ kenlm.scorer | xz -T0 > model_tensorflow_kab.tar.xz
         fi;
 
         if [ ! -f "model_tflite_kab.tar.xz" ]; then
             tar -cf - \
-                -C $DATADIR/models/ output_graph.tflite \
+                -C /mnt/models/ output_graph.tflite \
                 -C $HOMEDIR/${MODEL_LANGUAGE}/data_kab/ alphabet.txt \
-                -C $DATADIR/lm/ lm.binary trie | xz -T0 > model_tflite_kab.tar.xz
+                -C /mnt/lm/ kenlm.scorer | xz -T0 > model_tflite_kab.tar.xz
         fi;
         
         if [ ! -f "checkpoint_kab.tar.xz" ]; then
@@ -31,8 +31,8 @@ pushd /$DATADIR
             done;
         
             tar -cf - \
-                -C $DATADIR/checkpoints/ checkpoint ${all_checkpoint_path} | xz -T0 > "checkpoint_kab.tar.xz"
+                -C /mnt/checkpoints/ best_dev_checkpoint ${all_checkpoint_path} | xz -T0 > "checkpoint_kab.tar.xz"
         fi;
 
-        cp $DATADIR/models/*.zip .
+        cp /mnt/models/*.zip .
 popd
