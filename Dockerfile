@@ -1,9 +1,11 @@
 FROM nvidia/cuda:10.0-cudnn7-runtime-ubuntu18.04
 
-ARG ds_repo=MestafaKamal/DeepSpeech
+ARG ds_repo=mozilla/DeepSpeech
+ARG ds_branch=02e4c7624063377cdb711d13a0fc8e901818cf1a
+ARG ds_sha1=02e4c7624063377cdb711d13a0fc8e901818cf1a
 ARG cc_repo=MestafaKamal/CorporaCreator
 ARG kenlm_repo=kpu/kenlm
-ARG kenlm_branch=2ad7cb56924cd3c6811c604973f592cb5ef604eb
+ARG kenlm_branch=87e85e66c99ceff1fab2500a7c60c01da7315eec
 
 ARG model_language=kab
 
@@ -16,6 +18,9 @@ ARG lm_alpha=0.65
 ARG lm_beta=1.45
 ARG beam_width=500
 ARG early_stop=1
+ARG lm_top_k=500000
+
+ARG amp=0
 
 ARG duplicate_sentence_count=1
 
@@ -29,7 +34,6 @@ ENV LANG=C.UTF-8
 ENV DEBIAN_FRONTEND noninteractive
 
 ENV HOMEDIR /home/trainer
-ENV DATADIR /mnt
 
 ENV VIRTUAL_ENV_NAME ds-train
 ENV VIRTUAL_ENV $HOMEDIR/$VIRTUAL_ENV_NAME
@@ -49,6 +53,9 @@ ENV DROPOUT=$dropout
 ENV LM_ALPHA=$lm_alpha
 ENV LM_BETA=$lm_beta
 ENV BEAM_WIDTH=$beam_width
+ENV LM_TOP_K=$lm_top_k
+
+ENV AMP=$amp
 
 ENV DUPLICATE_SENTENCE_COUNT=$duplicate_sentence_count
 
@@ -97,7 +104,7 @@ USER trainer
 
 WORKDIR $HOMEDIR
 
-RUN wget -O - https://bitbucket.org/eigen/eigen/get/3.2.8.tar.bz2 | tar xj
+RUN wget -O - https://gitlab.com/libeigen/eigen/-/archive/3.2.8/eigen-3.2.8.tar.bz2 | tar xj
 
 RUN git clone https://github.com/$kenlm_repo.git && cd kenlm && git checkout $kenlm_branch \
     && mkdir -p build \
@@ -113,11 +120,27 @@ RUN git clone https://github.com/$ds_repo.git $DS_DIR
 
 WORKDIR $DS_DIR
 
-RUN cat requirements.txt | sed -e 's/^tensorflow/tensorflow-gpu/g' | pip install -r /dev/stdin
+RUN git checkout $ds_branch
 
-RUN pip install `python util/taskcluster.py --decoder`
+#RUN cat requirements.txt | sed -e 's/^tensorflow/tensorflow-gpu/g' | pip install -r /dev/stdin
 
-RUN python3 util/taskcluster.py --target native_client/
+#RUN pip install -r requirements.txt
+
+WORKDIR $DS_DIR
+
+RUN pip install --upgrade pip==20.0.2 wheel==0.34.2 setuptools==46.1.3
+RUN DS_NOTENSORFLOW=y pip install --upgrade --force-reinstall -e .
+RUN pip install --upgrade tensorflow
+#RUN pip install --upgrade tensorflow-gpu==1.15.2
+
+#RUN pip install `python util/taskcluster.py --decoder`
+
+#RUN python3 util/taskcluster.py --target native_client/
+
+RUN python util/taskcluster.py \
+	--target="$(pwd)" \
+	--artifact="native_client.tar.xz" && ls -hal generate_scorer_package 
+
 
 RUN TASKCLUSTER_SCHEME="https://community-tc.services.mozilla.com/api/index/v1/task/project.deepspeech.tensorflow.pip.%(branch_name)s.%(arch_string)s/artifacts/public/%(artifact_name)s" python3 util/taskcluster.py \
 	--target="$(pwd)" \
@@ -132,6 +155,13 @@ WORKDIR $CC_DIR
 
 RUN pip install -r requirements.txt
 
+# Avoid "error: pandas 1.1.0 is installed but pandas==1.0.5 is required by {'modin'}"
+RUN pip install pandas==1.0.5
+
+# error: parso 0.8.0 is installed but parso<0.8.0,>=0.7.0 is required by {'jedi'}
+RUN pip install parso==0.7.0
+
+
 RUN python3 setup.py install 
 
 WORKDIR $HOMEDIR
@@ -139,12 +169,12 @@ WORKDIR $HOMEDIR
 ENV PATH="$HOMEDIR/kenlm/build/bin/:$PATH"
 
 # Copy now so that docker build can leverage caches
-COPY --chown=trainer:trainer run.sh counter.py package.sh $HOMEDIR/
+COPY --chown=trainer:trainer . $HOMEDIR/
 
-COPY --chown=trainer:trainer ${MODEL_LANGUAGE}/*.sh $HOMEDIR/${MODEL_LANGUAGE}/
+COPY --chown=trainer:trainer ${MODEL_LANGUAGE}/ $HOMEDIR/${MODEL_LANGUAGE}/
 
-COPY --chown=trainer:trainer ${MODEL_LANGUAGE}/Python/*.py $HOMEDIR/${MODEL_LANGUAGE}/Python/
+COPY --chown=trainer:trainer ${MODEL_LANGUAGE}/Python/ $HOMEDIR/${MODEL_LANGUAGE}/Python/
 
-COPY --chown=trainer:trainer ${MODEL_LANGUAGE}/data_kab/alphabet.txt $HOMEDIR/${MODEL_LANGUAGE}/data_kab/
+COPY --chown=trainer:trainer ${MODEL_LANGUAGE}/data_kab/ $HOMEDIR/${MODEL_LANGUAGE}/data_kab/
 
 ENTRYPOINT "$HOMEDIR/run.sh"
