@@ -11,9 +11,9 @@ if [ -z "${CV_RELEASE_FILENAME}" ]; then
 fi;
 
 pushd $DS_DIR
-    
-   
-    if [ ! -f "/mnt/sources/${CV_RELEASE_FILENAME}" ]; then
+
+
+    if [ ! -f "/mnt/sources/${CV_RELEASE_FILENAME}" ]; then		
 		exit 1
 	fi;
 
