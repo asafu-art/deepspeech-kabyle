@@ -131,7 +131,7 @@ WORKDIR $DS_DIR
 RUN pip install --upgrade pip==20.0.2 wheel==0.34.2 setuptools==46.1.3
 RUN DS_NOTENSORFLOW=y pip install --upgrade --force-reinstall -e .
 #RUN pip install --upgrade tensorflow
-RUN pip install --upgrade tensorflow-gpu==1.15.2
+RUN pip install --upgrade tensorflow-gpu==1.15.4
 
 #RUN pip install `python util/taskcluster.py --decoder`
 
