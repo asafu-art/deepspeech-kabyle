@@ -4,7 +4,7 @@
 # to use '#' as a label.
 # This file containes the kabyle alphabet with some extra letters due to different keyboards. 
 # The extra letters are allowed here in order to appear in the CSV files, 
-# and are to be replaced by standard kabyle letters.
+# and are to be replaced by standard Kabyle letters.
  
 a
 b
@@ -42,8 +42,6 @@ x
 y
 z
 ẓ
--
-σ
 γ
 ğ
 ε
