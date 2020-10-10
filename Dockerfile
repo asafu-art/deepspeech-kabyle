@@ -155,7 +155,7 @@ WORKDIR $CC_DIR
 
 RUN pip install -r requirements.txt
 
-# Avoid "error: pandas 1.1.0 is installed but pandas==1.0.2 is required by {'modin'}"
+# Avoid "error: pandas 1.1.0 is installed but pandas==1.1.2 is required by {'modin'}"
 RUN pip install pandas==1.1.2
 
 # error: parso 0.8.0 is installed but parso<0.8.0,>=0.7.0 is required by {'jedi'}
