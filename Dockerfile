@@ -155,8 +155,8 @@ WORKDIR $CC_DIR
 
 RUN pip install -r requirements.txt
 
-# Avoid "error: pandas 1.1.0 is installed but pandas==1.0.5 is required by {'modin'}"
-RUN pip install pandas==1.0.5
+# Avoid "error: pandas 1.1.0 is installed but pandas==1.0.2 is required by {'modin'}"
+RUN pip install pandas==1.1.2
 
 # error: parso 0.8.0 is installed but parso<0.8.0,>=0.7.0 is required by {'jedi'}
 RUN pip install parso==0.7.0
@@ -172,8 +172,6 @@ ENV PATH="$HOMEDIR/kenlm/build/bin/:$PATH"
 COPY --chown=trainer:trainer . $HOMEDIR/
 
 COPY --chown=trainer:trainer ${MODEL_LANGUAGE}/ $HOMEDIR/${MODEL_LANGUAGE}/
-
-COPY --chown=trainer:trainer ${MODEL_LANGUAGE}/Python/ $HOMEDIR/${MODEL_LANGUAGE}/Python/
 
 COPY --chown=trainer:trainer ${MODEL_LANGUAGE}/data_kab/ $HOMEDIR/${MODEL_LANGUAGE}/data_kab/
 
