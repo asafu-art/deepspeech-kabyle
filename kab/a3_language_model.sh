@@ -31,7 +31,7 @@ pushd $HOME/ds/
 				--output_dir /mnt/lm/ \
 				--top_k ${LM_TOP_K} \
 				--kenlm_bins $HOME/kenlm/build/bin/ \
-				--arpa_order 3 \
+				--arpa_order 4 \
 				--max_arpa_memory "85%" \
 				--arpa_prune "0|0|1" \
 				--binary_a_bits 255 \

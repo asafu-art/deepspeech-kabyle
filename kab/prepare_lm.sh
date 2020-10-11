@@ -35,9 +35,7 @@ if [ ! -f "/mnt/lm/lm.binary" ]; then
 
 		wget https://raw.githubusercontent.com/mozillakab/Kabyletexts/master/lm/isefra.txt -P /mnt/extracted/data/text_kab/
 
-		wget https://raw.githubusercontent.com/mozillakab/Kabyletexts/master/lm/wiki.kab.txt -P /mnt/extracted/data/text_kab/
-
-		wget https://raw.githubusercontent.com/MestafaKamal/kabyle-language-data/master/tatoebaSentences.txt -P /mnt/extracted/data/text_kab/
+		wget https://raw.githubusercontent.com/mozillakab/Kabyletexts/master/lm/wiki.kab.txt -P /mnt/extracted/data/text_kab/		
 
 		cat /mnt/extracted/data/text_kab/Aklanntayri.pdf.bis.txt \
 		/mnt/extracted/data/text_kab/Amakrad.pdf.bis.txt \
@@ -52,7 +50,6 @@ if [ ! -f "/mnt/lm/lm.binary" ]; then
 		/mnt/extracted/data/text_kab/abucidan.txt \
 		/mnt/extracted/data/text_kab/imedyazen.txt \
 		/mnt/extracted/data/text_kab/isefra.txt \
-		/mnt/extracted/data/text_kab/wiki.kab.txt \
-		/mnt/extracted/data/text_kab/tatoebaSentences.txt  > /mnt/extracted/data/cv_kab/allSentences.txt
+		/mnt/extracted/data/text_kab/wiki.kab.txt > /mnt/extracted/data/cv_kab/allSentences.txt		
 
 fi;
