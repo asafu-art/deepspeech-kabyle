@@ -13,8 +13,6 @@ if [ ! -f "/mnt/lm/lm.binary" ]; then
 
 		wget https://raw.githubusercontent.com/mozillakab/Kabyletexts/master/lm/Amakrad.pdf.bis.txt -P /mnt/extracted/data/text_kab/
 
-		wget https://raw.githubusercontent.com/mozillakab/Kabyletexts/master/lm/Amezgun.pdf.bis.txt -P /mnt/extracted/data/text_kab/
-
 		wget https://raw.githubusercontent.com/mozillakab/Kabyletexts/master/lm/Amtmeqquntntzeggigin.pdf.bis.txt -P /mnt/extracted/data/text_kab/
 
 		wget https://raw.githubusercontent.com/mozillakab/Kabyletexts/master/lm/Anzaren.pdf.bis.txt -P /mnt/extracted/data/text_kab/
@@ -43,7 +41,6 @@ if [ ! -f "/mnt/lm/lm.binary" ]; then
 
 		cat /mnt/extracted/data/text_kab/Aklanntayri.pdf.bis.txt \
 		/mnt/extracted/data/text_kab/Amakrad.pdf.bis.txt \
-		/mnt/extracted/data/text_kab/Amezgun.pdf.bis.txt \
 		/mnt/extracted/data/text_kab/Amtmeqquntntzeggigin.pdf.bis.txt \
 		/mnt/extracted/data/text_kab/Anzaren.pdf.bis.txt \
 		/mnt/extracted/data/text_kab/Azalntayri.pdf.bis.txt \
