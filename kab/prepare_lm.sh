@@ -30,12 +30,18 @@ if [ ! -f "/mnt/lm/lm.binary" ]; then
 		wget https://raw.githubusercontent.com/mozillakab/Kabyletexts/master/lm/abucidan.txt -P /mnt/extracted/data/text_kab/
 		
 		wget https://raw.githubusercontent.com/mozillakab/Kabyletexts/master/lm/halima.txt -P /mnt/extracted/data/text_kab/
+		
+		wget https://raw.githubusercontent.com/mozillakab/Kabyletexts/master/lm/idlhenni.txt -P /mnt/extracted/data/text_kab/
 
 		wget https://raw.githubusercontent.com/mozillakab/Kabyletexts/master/lm/imedyazen.txt -P /mnt/extracted/data/text_kab/
 
 		wget https://raw.githubusercontent.com/mozillakab/Kabyletexts/master/lm/isefra.txt -P /mnt/extracted/data/text_kab/
 
 		wget https://raw.githubusercontent.com/mozillakab/Kabyletexts/master/lm/nadia.txt -P /mnt/extracted/data/text_kab/
+
+		wget https://raw.githubusercontent.com/mozillakab/Kabyletexts/master/lm/ussanditmurt.txt -P /mnt/extracted/data/text_kab/
+
+		wget https://raw.githubusercontent.com/mozillakab/Kabyletexts/master/lm/uzzuntayri.txt -P /mnt/extracted/data/text_kab/
 
 		wget https://raw.githubusercontent.com/mozillakab/Kabyletexts/master/lm/wiki.kab.txt -P /mnt/extracted/data/text_kab/
 
@@ -50,9 +56,12 @@ if [ ! -f "/mnt/lm/lm.binary" ]; then
 		/mnt/extracted/data/text_kab/aberrani.txt \
 		/mnt/extracted/data/text_kab/abucidan.txt \
 		/mnt/extracted/data/text_kab/halima.txt \
+		/mnt/extracted/data/text_kab/idlhenni.txt \
 		/mnt/extracted/data/text_kab/imedyazen.txt \
 		/mnt/extracted/data/text_kab/isefra.txt \
 		/mnt/extracted/data/text_kab/nadia.txt \
+		/mnt/extracted/data/text_kab/ussanditmurt.txt \
+		/mnt/extracted/data/text_kab/uzzuntayri.txt \
 		/mnt/extracted/data/text_kab/wiki.kab.txt > /mnt/extracted/data/cv_kab/allSentences.txt
 
 fi;
