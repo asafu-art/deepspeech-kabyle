@@ -171,10 +171,10 @@ WORKDIR $HOMEDIR
 ENV PATH="$HOMEDIR/kenlm/build/bin/:$PATH"
 
 # Copy now so that docker build can leverage caches
-COPY --chown=trainer:trainer . $HOMEDIR/
+COPY --chown=trainer:trainer . run.sh checks.sh corpora.patch package.sh $HOMEDIR/
 
-COPY --chown=trainer:trainer ${MODEL_LANGUAGE}/ $HOMEDIR/${MODEL_LANGUAGE}/
+COPY --chown=trainer:trainer ${MODEL_LANGUAGE}/* $HOMEDIR/${MODEL_LANGUAGE}/
 
-COPY --chown=trainer:trainer ${MODEL_LANGUAGE}/data_kab/ $HOMEDIR/${MODEL_LANGUAGE}/data_kab/
+COPY --chown=trainer:trainer ${MODEL_LANGUAGE}/data_kab/* $HOMEDIR/${MODEL_LANGUAGE}/data_kab/
 
 ENTRYPOINT "$HOMEDIR/run.sh"
