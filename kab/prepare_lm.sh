@@ -37,6 +37,8 @@ if [ ! -f "/mnt/lm/lm.binary" ]; then
 
 		wget https://raw.githubusercontent.com/mozillakab/Kabyletexts/master/lm/isefra.txt -P /mnt/extracted/data/text_kab/
 
+		wget https://raw.githubusercontent.com/mozillakab/Kabyletexts/master/lm/itranlehzentirgaasirem.txt -P /mnt/extracted/data/text_kab/
+
 		wget https://raw.githubusercontent.com/mozillakab/Kabyletexts/master/lm/nadia.txt -P /mnt/extracted/data/text_kab/
 
 		wget https://raw.githubusercontent.com/mozillakab/Kabyletexts/master/lm/ussanditmurt.txt -P /mnt/extracted/data/text_kab/
@@ -59,6 +61,7 @@ if [ ! -f "/mnt/lm/lm.binary" ]; then
 		/mnt/extracted/data/text_kab/idlhenni.txt \
 		/mnt/extracted/data/text_kab/imedyazen.txt \
 		/mnt/extracted/data/text_kab/isefra.txt \
+		/mnt/extracted/data/text_kab/itranlehzentirgaasirem.txt \
 		/mnt/extracted/data/text_kab/nadia.txt \
 		/mnt/extracted/data/text_kab/ussanditmurt.txt \
 		/mnt/extracted/data/text_kab/uzzuntayri.txt \
