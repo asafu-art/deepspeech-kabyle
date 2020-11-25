@@ -147,10 +147,13 @@ RUN pip install --upgrade pip==20.0.2 wheel==0.34.2 setuptools==46.1.3
 RUN DS_NOTENSORFLOW=y pip install --upgrade --force-reinstall -e .
 RUN pip install --upgrade tensorflow-gpu==1.15.2
 
+<<<<<<< HEAD
 RUN TASKCLUSTER_SCHEME="https://community-tc.services.mozilla.com/api/index/v1/task/project.deepspeech.tensorflow.pip.%(branch_name)s.%(arch_string)s/artifacts/public/%(artifact_name)s" python util/taskcluster.py \
 	--target="$(pwd)" \
 	--artifact="convert_graphdef_memmapped_format" \
 	--branch="r1.15" && chmod +x convert_graphdef_memmapped_format
+=======
+>>>>>>> dev
 
 RUN python util/taskcluster.py \
 	--target="$(pwd)" \
