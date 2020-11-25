@@ -46,7 +46,7 @@ pushd $DS_DIR
 
 		python -u DeepSpeech.py \
 				--show_progressbar True \
-				--use_cudnn_rnn True \
+				--train_cudnn True \
 				${AMP_FLAG} \
 				--alphabet_config_path $HOMEDIR/${MODEL_LANGUAGE}/data_kab/alphabet.txt \
 				--scorer_path /mnt/lm/kenlm.scorer \
