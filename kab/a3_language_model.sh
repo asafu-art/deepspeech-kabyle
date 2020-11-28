@@ -23,7 +23,7 @@ $HOMEDIR/${MODEL_LANGUAGE}/prepare_lm.sh
 
 
 
-pushd $HOME/ds/
+pushd $DS_DIR
 
 	if [ ! -f "/mnt/lm/lm.binary" ]; then
 			python data/lm/generate_lm.py \

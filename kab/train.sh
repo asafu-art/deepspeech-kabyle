@@ -41,8 +41,9 @@ pushd $DS_DIR
 	ALL_METADATA_FLAGS="$ALL_METADATA_FLAGS --export_max_ds_version $METADATA_MAX_DS_VERSION"
 	ALL_METADATA_FLAGS="$ALL_METADATA_FLAGS --export_description $METADATA_DESCRIPTION"
 
+export TF_FORCE_GPU_GROWTH=true
 
-	if [ ! -f "/mnt/checkpoints/best_dev_checkpoint" ]; then		
+	if [ ! -f "/mnt/checkpoints/best_dev_checkpoint" ]; then
 
 		python -u DeepSpeech.py \
 				--show_progressbar True \
